@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ECommerce.Controllers
@@ -18,16 +19,13 @@ namespace ECommerce.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly ILogger _logger;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager,
-            ILogger<AccountController> logger)
+            SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _logger = logger;
         }
 
         [TempData]
@@ -54,12 +52,10 @@ namespace ECommerce.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User Logged in.");
                     return RedirectToLocal(returnUrl);
                 }
                 if (result.IsLockedOut)
                 {
-                    _logger.LogWarning("User is locked out");
                     return RedirectToAction(nameof(Lockout));
                 }
                 else
@@ -87,25 +83,32 @@ namespace ECommerce.Controllers
             return View();
         }
 
-        [HttpGet]
+        [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
+        public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    LastNAme = model.LastName,
+                    Birthday = model.Birthday
+                };
+
                 var result = await _userManager.CreateAsync(user, model.Password);
+
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User created a new account with password");
+                    //Claim claim = new Claim(ClaimTypes.Name, $"{model.FirstName} {model.LastName}", ClaimValueTypes.String);
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    _logger.LogInformation("User created a new account with password");
-                    return RedirectToLocal(returnUrl);
+
+                    RedirectToAction("Index", "Home");
                 }
-                AddErrors(result);
             }
 
             return View(model);
@@ -117,7 +120,6 @@ namespace ECommerce.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            _logger.LogInformation("User logged out.");
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 

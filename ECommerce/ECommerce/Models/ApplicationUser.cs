@@ -8,5 +8,14 @@ namespace ECommerce.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        public string FirstName { get; set; }
+        public string LastNAme { get; set; }
+        public DateTime Birthday { get; set; }
+    }
+
+    public static class ApplicationRoles
+    {
+        public const string Admin = "Admin";
+        public const string Member = "Member";
     }
 }

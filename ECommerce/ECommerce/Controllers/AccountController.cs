@@ -46,10 +46,9 @@ namespace ECommerce.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
-            ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe);
+                var result = await _signInManager.CheckPasswordSignInAsync(model.Password);
                 if (result.Succeeded)
                 {
                     return RedirectToLocal(returnUrl);
@@ -103,8 +102,20 @@ namespace ECommerce.Controllers
 
                 if (result.Succeeded)
                 {
-                    //Claim claim = new Claim(ClaimTypes.Name, $"{model.FirstName} {model.LastName}", ClaimValueTypes.String);
+                    List<Claim> userClaims = new List<Claim>();
 
+                    Claim claimName = new Claim(ClaimTypes.Name, $"{model.FirstName} {model.LastName}", ClaimValueTypes.String);
+                    Claim claimEmail = new Claim(ClaimTypes.Email, model.Email, ClaimValueTypes.Email);
+                    Claim claimBirth = new Claim(ClaimTypes.DateOfBirth, new DateTime
+                        (model.Birthday.Year, model.Birthday.Month, model.Birthday.Day).ToString("u"),
+                        ClaimValueTypes.DateTime);
+
+                    userClaims.Add(claimName);
+                    userClaims.Add(claimEmail);
+                    userClaims.Add(claimBirth);
+
+                    await _userManager.AddClaimsAsync(user, userClaims);
+                    await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
                     await _signInManager.SignInAsync(user, isPersistent: false);
 
                     RedirectToAction("Index", "Home");

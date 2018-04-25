@@ -18,7 +18,7 @@ namespace E_commerceStore
 {
     public class Startup
     {
-        //enable configuration setup
+        //enable configuration setup, dependancy injection
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -31,11 +31,14 @@ namespace E_commerceStore
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddMvc();
+
             services.AddDbContext<ApplicationDbContext>(options=>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             
 
-
+            /*This is the Configure file for setting up using a Identity database*/
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
@@ -49,6 +52,14 @@ namespace E_commerceStore
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseStaticFiles();
+
+            app.UseAuthentication();
+
+            app.UseMvcWithDefaultRoute();
+       
+
 
             app.Run(async (context) =>
             {

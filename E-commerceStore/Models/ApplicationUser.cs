@@ -20,8 +20,6 @@ namespace EcommerceStore.Models
 
         public string FavColor { get; set; }
 
-       
-
     }
 
     public static class ApplicationRoles

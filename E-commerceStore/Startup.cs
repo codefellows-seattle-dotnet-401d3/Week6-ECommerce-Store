@@ -13,7 +13,6 @@ using EcommerceStore.Data;
 using EcommerceStore.Models;
 
 
-
 namespace E_commerceStore
 {
     public class Startup
@@ -48,6 +47,24 @@ namespace E_commerceStore
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+
+            //This line adds the policy to the role
+            //Dependency injection life cycles
+            /* singleton -> for the life of the application
+             * scoped -> for the lifetime per the session
+             * Trainsent -> always being called
+             * 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminOnly")
+                options-> allows policy requirments inside of here .
+
+
+            }*/
+           
+            //
+            services.addtr
 
         }
 

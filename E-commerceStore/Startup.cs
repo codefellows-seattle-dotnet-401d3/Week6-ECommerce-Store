@@ -34,11 +34,17 @@ namespace E_commerceStore
 
             services.AddMvc();
 
+
+            // adding the Database
             services.AddDbContext<ApplicationDbContext>(options=>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             
 
+            
             /*This is the Configure file for setting up using a Identity database*/
+            //Application user- > 
+            //IdentityRole -> 
+            //Add DefaultTokenProviders- >
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
@@ -53,10 +59,12 @@ namespace E_commerceStore
                 app.UseDeveloperExceptionPage();
             }
 
+            //application. allows read 
             app.UseStaticFiles();
-
+            //application. Authentication usage
             app.UseAuthentication();
 
+            //Home.Route
             app.UseMvcWithDefaultRoute();
        
 

@@ -13,7 +13,7 @@ using EcommerceStore.Data;
 using EcommerceStore.Models;
 
 
-namespace E_commerceStore
+namespace EcommerceStore
 {
     public class Startup
     {
@@ -64,7 +64,7 @@ namespace E_commerceStore
             }*/
            
             //
-            services.addtr
+            //services.addtr
 
         }
 
@@ -88,7 +88,7 @@ namespace E_commerceStore
 
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("Hello World!");
+                await context.Response.WriteAsync("Hello Tiger You are at the startup");
             });
         }
     }

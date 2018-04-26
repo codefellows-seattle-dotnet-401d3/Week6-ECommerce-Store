@@ -37,6 +37,8 @@ namespace EcommerceStore.Models.ViewModels
         [Compare("Password", ErrorMessage = "The Password No match")]
         public string ConfirmPassword { get; set; }
 
+        //Adding Items here 
+
 
     }
 }

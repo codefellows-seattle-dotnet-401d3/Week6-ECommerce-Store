@@ -116,9 +116,6 @@ namespace EcommerceStore.Controllers
                     RedirectToAction("Index", "Home");
                 }
 
-
-
-
             }
 
             // returns register view model
@@ -129,6 +126,49 @@ namespace EcommerceStore.Controllers
 
 
         }
+
+        /// <summary>
+        /// SEPERATION OF CONCERNS BOTTOM IS THE LOGIN PAGES
+        /// </summary>
+        /// <returns></returns>
+
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel lvm)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(lvm.Email, lvm.Password, false, false);
+
+                if (result.Succeeded)
+                {
+                    var user = await _userManager.FindByEmailAsync(lvm.Email);
+                    var role = await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin);
+
+                    if (await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin))
+                    {
+                        return RedirectToAction("Index", "Admin");
+
+                    }
+
+                    return RedirectToAction("Index", "Home");
+                }
+
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+
+            }
+            return View(lvm);
+
+        }
+
+
+
 
     }
 }

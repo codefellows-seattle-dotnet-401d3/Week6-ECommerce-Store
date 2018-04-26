@@ -1,11 +1,26 @@
 ﻿@model EcommerceStore.Models.ApplicationUser
+@using Microsoft.AspNetCore.Identity
 
 
-@{ 
-    ViewData["Title"] = "Register";
+@if (User.Identity.IsAuthenticated)
+{
+    <h2>Hello @User.Identity.Name</h2>
+}
+else
+{
+    <h2> You don't have rights being here</h2>
 }
 
-Add Input Here
-Add Password HEre
+This is the Home page
 
-Add Extra links here
+Register
+<!-- asp-controller: must equal a controller with a Index View()
+    asp-action must equal a Views Folders
+    -->
+    <div class="container">
+        <a asp-controller="Account" asp-action="Register"> Here </a>
+    </div>
+        Login-Here
+        <a asp-controller="Account" asp-action="Login"> Here </a>
+
+

@@ -57,6 +57,7 @@ namespace EcommerceStore
              * 
             services.AddAuthorization(options =>
             {
+                options.Asddpolicy()
                 options.AddPolicy("AdminOnly")
                 options-> allows policy requirments inside of here .
 
@@ -93,3 +94,9 @@ namespace EcommerceStore
         }
     }
 }
+
+/* Create a products class and update it into our database 
+ * only Authorized members 
+ * 
+ * *
+ */

@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\E-commerceStore",
+    "\\E-commerceStore\\Models"
   ],
+  "SelectedNode": "\\E-commerceStore\\Models\\SeedMemberRoles.cs",
   "PreviewInSolutionExplorer": false
 }

@@ -17,7 +17,7 @@ namespace EcommerceStore.Componets
     public class TopPostsComponet : ViewComponent
     {
 
-        private WeekSix _componet;
+       // private WeekSix _componet;
 
         //bring in database context in order to perform dependency injection
         /* public TopPostsComponet(insert database here, context )
@@ -26,8 +26,8 @@ namespace EcommerceStore.Componets
         }
         */
 
-        public IViewComponetResult Invoke(int number)
-        { //you need parameters 
+      //  public IViewComponetResult Invoke(int number)
+       // { //you need parameters 
 
             //insert logic here, insert interface & dependency injection DI, create a interface in solution and invoke it here.
             //Insert product items here
@@ -38,7 +38,7 @@ namespace EcommerceStore.Componets
 
 
 
-        }
+        //}
 
 
         /*

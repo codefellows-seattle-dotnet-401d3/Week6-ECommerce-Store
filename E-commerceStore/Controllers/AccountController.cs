@@ -73,25 +73,28 @@ namespace EcommerceStore.Controllers
                     List<Claim> myClaims = new List<Claim>();
 
                     // rvm async method to add the FirstNAme and last name
-                    Claim claim = new Claim(ClaimTypes.Name, $"{rvm.FirstName} {rvm.LastName}",
+                    Claim Nameclaim = new Claim(ClaimTypes.Name, $"{rvm.FirstName} {rvm.LastName}",
 
                         ClaimValueTypes.String);
 
                     //rvm async method to add email 
-                    Claim claim1 = new Claim(ClaimTypes.Email, rvm.Email, ClaimValueTypes.Email);
+                    Claim Emailclaim = new Claim(ClaimTypes.Email, rvm.Email, ClaimValueTypes.Email);
 
                     //rvm async method to add DOB, create a new birth date time in a certain UTC; universal
                     //sorted time Converts in a string format; date-time.
-                    Claim claim2 = new Claim(ClaimTypes.DateOfBirth, new DateTime
+                    Claim Birthdayclaim = new Claim(ClaimTypes.DateOfBirth, new DateTime
                         (rvm.Birthday.Year, rvm.Birthday.Month, rvm.Birthday.Day).ToString("u"),
                         ClaimValueTypes.DateTime);
 
-                    // change the naming conventions "claim"
+                    Claim MusicFanclaim = new Claim(ClaimTypes.DateOfBirth, new DateTime
+                        (rvm.Birthday.Year, rvm.Birthday.Month, rvm.Birthday.Day).ToString("u"),
+                        ClaimValueTypes.DateTime);
 
                     // Add Method to add listed above name 
-                    myClaims.Add(claim);
-                    myClaims.Add(claim1);
-                    myClaims.Add(claim2);
+                    myClaims.Add(Nameclaim);
+                    myClaims.Add(Emailclaim);
+                    myClaims.Add(Birthdayclaim);
+                    myClaims.Add(MusicFanclaim);
 
 
                     //another calls to the _usermanger and adding claims
@@ -120,9 +123,6 @@ namespace EcommerceStore.Controllers
 
             // returns register view model
             return View();
-
-
-
 
 
         }

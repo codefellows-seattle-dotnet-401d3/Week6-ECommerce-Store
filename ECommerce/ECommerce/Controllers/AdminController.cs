@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ECommerce.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "Over21")]
     public class AdminController : Controller
     {
         public IActionResult Index()

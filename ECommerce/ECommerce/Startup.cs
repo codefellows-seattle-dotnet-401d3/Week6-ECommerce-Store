@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using ECommerce.Data;
 using ECommerce.Models;
+using ECommerce.Models.Policies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -26,12 +28,23 @@ namespace ECommerce
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+           // services.AddDbContext<ApplicationDbContext>(options =>
+           //     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseInMemoryDatabase(Guid.NewGuid().ToString()));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminOnly", policy => policy.RequireRole(ApplicationRoles.Admin));
+                options.AddPolicy("Over21", policy => policy.Requirements.Add(new MinimumAgeRequirement(21)));
+            });
+
+            services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();
 
             services.AddMvc();
         }

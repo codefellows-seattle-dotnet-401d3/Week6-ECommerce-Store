@@ -48,7 +48,7 @@ namespace ECommerce.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.CheckPasswordSignInAsync(model.Password);
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     return RedirectToLocal(returnUrl);

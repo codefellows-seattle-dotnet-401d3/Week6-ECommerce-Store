@@ -22,4 +22,5 @@ Exercise in using Identity to build an e-commerce store
 
 01-01-2001 4:59pm - Added functionality to add and delete some things. -->
 04-26-2018 9:35pm - Project started
-04-26-2018 11:35pm - Hand-copied AccountController scaffolding from Visual Studio suggestion.  Still lots of errors because the code is refering to classes not yet copied over.
+04-26-2018 11:35am - Hand-copied AccountController scaffolding from Visual Studio suggestion.  Still lots of errors because the code is refering to classes not yet copied over.
+04-26-2018 11:40am - Forgot to branch off of master

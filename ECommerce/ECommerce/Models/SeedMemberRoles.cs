@@ -17,13 +17,18 @@ namespace ECommerce.Models
         private static readonly List<IdentityRole> Roles = new List<IdentityRole>()
         {
             new IdentityRole{Name=ApplicationRoles.Admin,
-            NormalizedName = ApplicationRoles.Member.ToUpper(),
+            NormalizedName = ApplicationRoles.Admin.ToUpper(),
             ConcurrencyStamp = Guid.NewGuid().ToString()},
 
             new IdentityRole{Name=ApplicationRoles.Member,
                 NormalizedName = ApplicationRoles.Member.ToUpper(),
                 ConcurrencyStamp = Guid.NewGuid().ToString()}
         };
+
+        internal static void AddUserRoles(IServiceProvider services)
+        {
+            throw new NotImplementedException();
+        }
 
         public static void seedData(IServiceProvider sp, UserManager<ApplicationUser> um)
         {

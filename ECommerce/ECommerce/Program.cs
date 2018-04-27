@@ -25,6 +25,7 @@ namespace ECommerce
                 try
                 {
                     ProductSeedData.Initialize(services);
+                    SeedMemberRoles.AddUserRoles(services);
                 }
                 catch (Exception e)
                 {

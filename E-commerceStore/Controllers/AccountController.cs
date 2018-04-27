@@ -63,7 +63,7 @@ namespace EcommerceStore.Controllers
 
 
                 /*IF the user is successful is true Adding instanciate in to a <>list of claims
-                 * 
+                 * I  
                  */
 
                 if (result.Succeeded)
@@ -116,7 +116,7 @@ namespace EcommerceStore.Controllers
 
 
                     //
-                    RedirectToAction("Index", "Home");
+                    RedirectToAction("Index", "Home"); //REDIRECTS INDEX IN HOME
                 }
 
             }
@@ -126,12 +126,6 @@ namespace EcommerceStore.Controllers
 
 
         }
-
-        /// <summary>
-        /// SEPERATION OF CONCERNS BOTTOM IS THE LOGIN PAGES
-        /// </summary>
-        /// <returns></returns>
-
 
         [HttpGet]
         public IActionResult Login()

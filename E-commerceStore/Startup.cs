@@ -38,7 +38,7 @@ namespace EcommerceStore
             services.AddDbContext<ApplicationDbContext>(options=>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             
-
+            //POSSIBLY ADD A ANOTHER DB CONTEXT FOR PRODUCTS.
             
             /*This is the Configure file for setting up using a Identity database*/
             //Application user- > 

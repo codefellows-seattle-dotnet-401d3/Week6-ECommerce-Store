@@ -12,7 +12,7 @@ namespace EcommerceStore.Models
     public class SeedMemberRoles
     {
         private const string AdminEmail = "email@email.com";
-        private const string AdminPassword = "1234";
+        private const string AdminPassword = "1234"; // upper case password?? Use this to debug the password. if you are missing the 
 
         private static readonly List<IdentityRole> Roles = new List<IdentityRole>()
       {

@@ -30,6 +30,8 @@ namespace EcommerceStore
                 try
                 {
                     SeedMemberRoles.SeedData(services, userManager);
+
+                    //SeedMemberRoles.SeedData(services, userManager); --> seed the products data here.
                 }
                 catch (Exception ex)
                 {

@@ -1,0 +1,15 @@
+﻿-make sure when you build out the register in order to test, 
+-Seed the member roles, seed the products
+
+=====================O Auth=======================================
+OAuth -> offloading the login process into a sepera site.
+->ecommerce sites needs two external providers. easy ones are google Plus,
+-> must register with another client, the client then gives a token.
+-> auth.net let them touch the credit card., Amanda taked about how when she was 
+working at sandcastle, she never let their servers hold credit card info, she had let the auth.net widow prompt handle
+all credit card info.
+
+->Use the AccountController.cs on the scaffle to look at the ExternalLoginCallback method.
+
+
+

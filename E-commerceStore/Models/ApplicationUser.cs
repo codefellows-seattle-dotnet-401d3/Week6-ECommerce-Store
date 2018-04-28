@@ -28,4 +28,8 @@ namespace EcommerceStore.Models
         public const string Member = "Member";
     }
 
+    public enum Music { Country, Pop, Rock, Rythm_and_Blues}
+
+
+
 }

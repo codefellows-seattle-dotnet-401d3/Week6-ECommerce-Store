@@ -49,10 +49,10 @@ members to have the ability to manipulate inventory?!?!)
 [] Create a *ShopController* that is accessible by anyone (logged in or not) that shows all of the products that your
 store has to offer. Display an image of the item, it's name, and the price. 
 
-[] Create a "Profile" action in your *AccountController* that displays the users information. 
-	[] Allow the user the ability to edit their personal information (*Not* their email address, as that is their username to login....
+[ ] Create a "Profile" action in your *AccountController* that displays the users information. 
+	[ ] Allow the user the ability to edit their personal information (*Not* their email address, as that is their username to login....
 		- If you want to get tricky..there is a way to accomplish this..as a stretch goal you may figure it out if you wish.
-	[] Allow the user to change their password.
+	[ ] Allow the user to change their password.
 
 
 [] Start thinking about how you will track user's adding items to their cart and order history of a user. 
@@ -64,14 +64,14 @@ store has to offer. Display an image of the item, it's name, and the price.
 
  Buildig off of previous day's lab....
 
- [] Implement a `BasketDetails` view component into your site. This should live on your shopping pages(make sure it's on more than one page) to inform the users
+ [ ] Implement a `BasketDetails` view component into your site. This should live on your shopping pages(make sure it's on more than one page) to inform the users
  of all the items in their carts. 
- [] Make a Product landing page that is accessed whenever a user selects a product. This product landing page will show the product details, as well as 
+ [ ] Make a Product landing page that is accessed whenever a user selects a product. This product landing page will show the product details, as well as 
  an option to "Add to cart".
  
 ## Day 5
 Building off of previous day's lab...
-[] Incorporate at least 2 OAUTH external login providers into your site. 
+[ ] Incorporate at least 2 OAUTH external login providers into your site. 
 
 
 

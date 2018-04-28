@@ -42,7 +42,7 @@ You should have one each of the following:
 * [ ] Claims based policies (You have to be 21+, you may NOT use a minimum age policy for your lab.)
 * [ ] Present Claim based policy (Any user that has the "FavoriteColor" claim can access a part of the site)
 
-### Additional requirements
+### Additional Milestones
 * [ ] Update your existing code so that only Admins have access to the CRUD operations of the product (You don't want your 
 members to have the ability to manipulate inventory?!?!)
  
@@ -55,23 +55,38 @@ store has to offer. Display an image of the item, it's name, and the price.
 	* [ ] Allow the user to change their password.
 
 
-* [] Start thinking about how you will track user's adding items to their cart and order history of a user. 
+* [ ] Start thinking about how you will track user's adding items to their cart and order history of a user. 
 	 - Can we make it so that an admin can view all order history as well?
 	 - How are we going to track unchecked-out carts? (we will discuss this in class as different options...)
-
 
 ## Day 4
 
  Buildig off of previous day's lab....
 
  * [ ] Implement a `BasketDetails` view component into your site. This should live on your shopping pages(make sure it's on more than one page) to inform the users
- of all the items in their carts. 
+ of all the items in their carts.
  * [ ] Make a Product landing page that is accessed whenever a user selects a product. This product landing page will show the product details, as well as 
  an option to "Add to cart".
+
+ ### Hints with BasketItems
+ There are a couple different ways to hold onto your user's basket items. here are a couple of hints...
+ 1. Use an in session or in memory database
+ 2. Create seperate database tables such as `Baskets` and `BasketItems` that keeps track of the user's tables.
+	- if you want another explanation on this, please ask me. 
  
 ## Day 5
 Building off of previous day's lab...
 * [ ] Incorporate at least 2 OAUTH external login providers into your site. 
 
 
+## Day 6
 
+
+## Day 7
+
+## Final Milestones
+
+* [ ] Code Coverage of 85%
+* [ ] Web Site is Usable
+* [ ] Front End design is "Client Ready" (it looks nice)
+* [ ] Website is deployed to Azure

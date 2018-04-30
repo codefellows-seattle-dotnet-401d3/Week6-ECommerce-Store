@@ -44,7 +44,11 @@ namespace EcommerceStore.Models.ViewModels
 
         //Do you like music
         [Required]
-        public string Music { get; set; }
+        public bool Music { get; set; }
+
+        //Type of music
+        [Required]
+        public string MusicType { get; set; }
 
 
     }

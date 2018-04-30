@@ -1,4 +1,6 @@
-﻿@model EcommerceStore.Models.ViewModels.RegisterViewModel
+﻿@using EcommerceStore.Models
+@model EcommerceStore.Models.ViewModels.RegisterViewModel
+
 
 @{
     ViewData["Title"] = "Register";
@@ -47,10 +49,16 @@
         <input asp-for="ConfirmPassword" />
     </div>
 
+
     <div>
-        <label asp-for="MusicFan"> What kind of music do you like? </label>
-        <select asp-items="@Html.GetEnumSelectList(typeof(MusicFan))" /> What kind of music do you like? </select>
+        <label asp-for="Music"> music you like? </label>
+        <select asp-for="Music" asp-items="@Html.GetEnumSelectList(typeof(Music))"></select>
     </div>
 
-    <button type="submit">Register</button>
+    <div>
+        <label asp-for="MusicType"> What kind of music do you like? </label>
+        <select asp-for="MusicType" asp-items="@Html.GetEnumSelectList(typeof(MusicType))"></select>
+    </div>
+
+    <button type="submit"> Register</button>
 </form>

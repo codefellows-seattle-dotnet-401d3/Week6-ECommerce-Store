@@ -53,14 +53,15 @@ namespace EcommerceStore.Controllers
                     FirstName = rvm.FirstName,
                     LastName = rvm.LastName,
                     BirthDate = rvm.Birthday,
+                    Music = rvm.Music,
+                    MusicType = rvm.MusicType
+
                 };
 
                 //on Register view model sends to async results, keeps the password separte from the Application user.
                 //CreateAsync tells user-manager to make a query on the rvm.Password, makes sure that the code
                 //contiunes to run awaiting the call, makes the call to the external method
                 var result = await _userManager.CreateAsync(user, rvm.Password);
-
-
 
                 /*IF the user is successful is true Adding instanciate in to a <>list of claims
                  * I  
@@ -86,15 +87,23 @@ namespace EcommerceStore.Controllers
                         (rvm.Birthday.Year, rvm.Birthday.Month, rvm.Birthday.Day).ToString("u"),
                         ClaimValueTypes.DateTime);
 
-                    Claim MusicFanclaim = new Claim(ClaimTypes.DateOfBirth, new DateTime
-                        (rvm.Birthday.Year, rvm.Birthday.Month, rvm.Birthday.Day).ToString("u"),
-                        ClaimValueTypes.DateTime);
+
+                    Claim MusicFanClaim = new Claim(ClaimTypes.Equals, rvm.Music, ClaimValueTypes.String);
+
+
+
+                    Claim MusicFanClaim = new Claim("classCheck", rvm.Music.ToString(), ClaimValueTypes.String);
+                    Claim MusicTypeClaim = new Claim("classCheck", rvm.MusicType.ToString(), ClaimValueTypes.String);
+
 
                     // Add Method to add listed above name 
                     myClaims.Add(Nameclaim);
                     myClaims.Add(Emailclaim);
                     myClaims.Add(Birthdayclaim);
-                    myClaims.Add(MusicFanclaim);
+                    myClaims.Add(MusicFanClaim);
+                    myClaims.Add(MusicTypeClaim);
+
+
 
 
                     //another calls to the _usermanger and adding claims

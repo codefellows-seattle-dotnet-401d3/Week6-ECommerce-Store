@@ -29,10 +29,17 @@ namespace ECommerce
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            });
 
-           // services.AddDbContext<ApplicationDbContext>(options =>
-           //     options.UseInMemoryDatabase(Guid.NewGuid().ToString()));
+            services.AddDbContext<ProductDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            });
+
+            // services.AddDbContext<ApplicationDbContext>(options =>
+            //     options.UseInMemoryDatabase(Guid.NewGuid().ToString()));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -40,7 +47,8 @@ namespace ECommerce
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("AdminOnly", policy => policy.RequireRole(ApplicationRoles.Admin));
+                options.AddPolicy("Admin", policy => policy.RequireRole(ApplicationRoles.Admin));
+                options.AddPolicy("Member", policy => policy.RequireRole(ApplicationRoles.Member));
                 options.AddPolicy("Over21", policy => policy.Requirements.Add(new MinimumAgeRequirement(21)));
             });
 
@@ -54,16 +62,9 @@ namespace ECommerce
         {
             if (env.IsDevelopment())
             {
-                app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseStaticFiles();
             app.UseAuthentication();
             app.UseMvcWithDefaultRoute();
 

@@ -13,7 +13,6 @@ using System.Threading.Tasks;
 
 namespace ECommerce.Controllers
 {
-    [Authorize]
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
@@ -32,7 +31,6 @@ namespace ECommerce.Controllers
         public string ErrorMessage { get; set; }
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> Login(string returnUrl = null)
         {
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
@@ -42,7 +40,6 @@ namespace ECommerce.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
@@ -68,14 +65,12 @@ namespace ECommerce.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public IActionResult Lockout()
         {
             return View();
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public IActionResult Register(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
@@ -83,7 +78,6 @@ namespace ECommerce.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
@@ -109,6 +103,7 @@ namespace ECommerce.Controllers
                     Claim claimBirth = new Claim(ClaimTypes.DateOfBirth, new DateTime
                         (model.Birthday.Year, model.Birthday.Month, model.Birthday.Day).ToString("u"),
                         ClaimValueTypes.DateTime);
+                    
 
                     userClaims.Add(claimName);
                     userClaims.Add(claimEmail);

@@ -27,7 +27,7 @@ namespace ECommerce.Controllers
             });
         }
 
-        [Authorize(Policy = "Admin")]
+        //[Authorize(Policy = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Create(
             [Bind("Name", "Price", "Description", "ImagePath")] ProductCreateViewModel vm)
@@ -76,7 +76,7 @@ namespace ECommerce.Controllers
             return View(product);
         }
 
-        [Authorize(Policy = "Admin")]
+        //[Authorize(Policy = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -94,7 +94,7 @@ namespace ECommerce.Controllers
             return View(product);
         }
 
-        [Authorize(Policy ="Admin")]
+        //[Authorize(Policy ="Admin")]
         [HttpPost]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,Description,ImagePath")] Product product)
         {
@@ -133,7 +133,7 @@ namespace ECommerce.Controllers
             return _context.Product.Any(p => p.Id == id);
         }
 
-        [Authorize(Policy ="Admin")]
+        //[Authorize(Policy ="Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if(id == null)

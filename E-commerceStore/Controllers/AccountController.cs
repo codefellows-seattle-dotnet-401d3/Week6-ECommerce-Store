@@ -149,7 +149,7 @@ namespace EcommerceStore.Controllers
                 if (result.Succeeded)
                 {
                     var user = await _userManager.FindByEmailAsync(lvm.Email);
-                    var role = await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin);
+                   // var role = await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin);
 
                     if (await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin))
                     {

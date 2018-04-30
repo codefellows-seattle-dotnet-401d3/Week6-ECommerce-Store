@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20180426011308_Initial.cs" />
+    <Compile Remove="Migrations\20180426011308_Initial.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+    <Folder Include="Models\Products\" />
     <Folder Include="Views\Admin\" />
   </ItemGroup>
 

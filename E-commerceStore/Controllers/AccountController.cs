@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc;
 using EcommerceStore.Models.ViewModels;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
 
 namespace EcommerceStore.Controllers
 {
@@ -53,6 +54,9 @@ namespace EcommerceStore.Controllers
                     FirstName = rvm.FirstName,
                     LastName = rvm.LastName,
                     BirthDate = rvm.Birthday,
+                    Music = rvm.Music,
+                    MusicType = rvm.MusicType
+
                 };
 
                 //on Register view model sends to async results, keeps the password separte from the Application user.
@@ -60,10 +64,8 @@ namespace EcommerceStore.Controllers
                 //contiunes to run awaiting the call, makes the call to the external method
                 var result = await _userManager.CreateAsync(user, rvm.Password);
 
-
-
                 /*IF the user is successful is true Adding instanciate in to a <>list of claims
-                 * 
+                 * I  
                  */
 
                 if (result.Succeeded)
@@ -73,25 +75,36 @@ namespace EcommerceStore.Controllers
                     List<Claim> myClaims = new List<Claim>();
 
                     // rvm async method to add the FirstNAme and last name
-                    Claim claim = new Claim(ClaimTypes.Name, $"{rvm.FirstName} {rvm.LastName}",
+                    Claim Nameclaim = new Claim(ClaimTypes.Name, $"{rvm.FirstName} {rvm.LastName}",
 
                         ClaimValueTypes.String);
 
                     //rvm async method to add email 
-                    Claim claim1 = new Claim(ClaimTypes.Email, rvm.Email, ClaimValueTypes.Email);
+                    Claim Emailclaim = new Claim(ClaimTypes.Email, rvm.Email, ClaimValueTypes.Email);
 
                     //rvm async method to add DOB, create a new birth date time in a certain UTC; universal
                     //sorted time Converts in a string format; date-time.
-                    Claim claim2 = new Claim(ClaimTypes.DateOfBirth, new DateTime
+                    Claim Birthdayclaim = new Claim(ClaimTypes.DateOfBirth, new DateTime
                         (rvm.Birthday.Year, rvm.Birthday.Month, rvm.Birthday.Day).ToString("u"),
                         ClaimValueTypes.DateTime);
 
-                    // change the naming conventions "claim"
+
+                   // Claim MusicFanClaim = new Claim(ClaimTypes.Equals, rvm.Music, ClaimValueTypes.String);
+
+
+
+                    Claim MusicFanClaim = new Claim("MusicFanCheck", rvm.Music.ToString(), ClaimValueTypes.String);
+                    Claim MusicTypeClaim = new Claim("MusicType", rvm.MusicType.ToString(), ClaimValueTypes.String);
+
 
                     // Add Method to add listed above name 
-                    myClaims.Add(claim);
-                    myClaims.Add(claim1);
-                    myClaims.Add(claim2);
+                    myClaims.Add(Nameclaim);
+                    myClaims.Add(Emailclaim);
+                    myClaims.Add(Birthdayclaim);
+                    myClaims.Add(MusicFanClaim);
+                    myClaims.Add(MusicTypeClaim);
+
+
 
 
                     //another calls to the _usermanger and adding claims
@@ -113,7 +126,7 @@ namespace EcommerceStore.Controllers
 
 
                     //
-                    RedirectToAction("Index", "Home");
+                    RedirectToAction("Index", "Home"); //REDIRECTS INDEX IN HOME
                 }
 
             }
@@ -122,22 +135,9 @@ namespace EcommerceStore.Controllers
             return View();
 
 
-
-
-
         }
 
-        /// <summary>
-        /// SEPERATION OF CONCERNS BOTTOM IS THE LOGIN PAGES
-        /// </summary>
-        /// <returns></returns>
-
-
-        [HttpGet]
-        public IActionResult Login()
-        {
-            return View();
-        }
+        
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel lvm)
@@ -165,6 +165,15 @@ namespace EcommerceStore.Controllers
             }
             return View(lvm);
 
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Login()
+        {
+            //clear all external logins to ensure a new and clean login
+            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+
+            return View();
         }
 
 

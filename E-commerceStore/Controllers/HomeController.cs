@@ -11,6 +11,8 @@ namespace EcommerceStore.Controllers
     {
         public IActionResult Index()
         {
+
+            // Lets go to the view of the home index
             return View();
         }
     }

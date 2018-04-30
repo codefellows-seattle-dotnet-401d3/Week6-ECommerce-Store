@@ -18,8 +18,8 @@ namespace EcommerceStore.Models
 
         public DateTime BirthDate { get; set; }
 
-        public string FavColor { get; set; }
-
+        public bool Music { get; set; }
+        public string MusicType { get; set; }
     }
 
     public static class ApplicationRoles
@@ -27,5 +27,8 @@ namespace EcommerceStore.Models
         public const string Admin = "Admin";
         public const string Member = "Member";
     }
+
+    public enum MusicType { Country, Pop, Rock, }
+    public enum Music {yes, no, }
 
 }

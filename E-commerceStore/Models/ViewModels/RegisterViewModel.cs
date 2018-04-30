@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using EcommerceStore.Models.ViewModels;
+using EcommerceStore.Controllers;
+using EcommerceStore.Models;
 
 namespace EcommerceStore.Models.ViewModels
 {
     /* adding the models to the views in the set.
+     * 
+     * 
      */
 
     public class RegisterViewModel
@@ -29,7 +34,7 @@ namespace EcommerceStore.Models.ViewModels
         [Required]
         [StringLength(20, ErrorMessage = "Please enter something", MinimumLength = 5)]
         [DataType(DataType.Password)]
-        public string Password { get; set;}
+        public string Password { get; set; }
 
         //Confirmation of the passwords
         [DataType(DataType.Password)]
@@ -37,8 +42,18 @@ namespace EcommerceStore.Models.ViewModels
         [Compare("Password", ErrorMessage = "The Password No match")]
         public string ConfirmPassword { get; set; }
 
-        //Adding Items here 
+        //Do you like music
+        [Required]
+        public bool Music { get; set; }
+
+        //Type of music
+        [Required]
+        public string MusicType { get; set; }
 
 
     }
 }
+        
+
+        //need to create an enum somewhere else in this file structure.
+        // public enum music type {country, rock, Pop}

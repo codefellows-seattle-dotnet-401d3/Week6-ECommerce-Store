@@ -37,8 +37,6 @@ namespace EcommerceStore.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
-                    b.Property<string>("FavColor");
-
                     b.Property<string>("FirstName");
 
                     b.Property<string>("LastName");
@@ -46,6 +44,10 @@ namespace EcommerceStore.Migrations
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<bool>("Music");
+
+                    b.Property<string>("MusicType");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);

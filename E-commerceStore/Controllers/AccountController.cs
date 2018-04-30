@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc;
 using EcommerceStore.Models.ViewModels;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
 
 namespace EcommerceStore.Controllers
 {
@@ -88,12 +89,12 @@ namespace EcommerceStore.Controllers
                         ClaimValueTypes.DateTime);
 
 
-                    Claim MusicFanClaim = new Claim(ClaimTypes.Equals, rvm.Music, ClaimValueTypes.String);
+                   // Claim MusicFanClaim = new Claim(ClaimTypes.Equals, rvm.Music, ClaimValueTypes.String);
 
 
 
-                    Claim MusicFanClaim = new Claim("classCheck", rvm.Music.ToString(), ClaimValueTypes.String);
-                    Claim MusicTypeClaim = new Claim("classCheck", rvm.MusicType.ToString(), ClaimValueTypes.String);
+                    Claim MusicFanClaim = new Claim("MusicFanCheck", rvm.Music.ToString(), ClaimValueTypes.String);
+                    Claim MusicTypeClaim = new Claim("MusicType", rvm.MusicType.ToString(), ClaimValueTypes.String);
 
 
                     // Add Method to add listed above name 
@@ -136,11 +137,7 @@ namespace EcommerceStore.Controllers
 
         }
 
-        [HttpGet]
-        public IActionResult Login()
-        {
-            return View();
-        }
+        
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel lvm)
@@ -168,6 +165,15 @@ namespace EcommerceStore.Controllers
             }
             return View(lvm);
 
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Login()
+        {
+            //clear all external logins to ensure a new and clean login
+            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+
+            return View();
         }
 
 

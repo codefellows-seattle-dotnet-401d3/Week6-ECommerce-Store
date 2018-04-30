@@ -12,7 +12,7 @@ namespace EcommerceStore.Controllers
      * 
      */
 
-    //[Authorize(Policy ="AdminOnly")]
+   // [Authorize(Policy ="AdminOnly")]
     public class AdminController : Controller 
     {
         public IActionResult Index()

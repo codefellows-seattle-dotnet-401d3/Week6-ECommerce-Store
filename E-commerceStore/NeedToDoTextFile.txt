@@ -13,3 +13,8 @@ all credit card info.
 
 
 
+??/place this inside of the Register view
+<!--
+@{
+    ViewData["Title"] = "Register";
+} -->

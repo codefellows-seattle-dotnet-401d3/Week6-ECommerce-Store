@@ -83,10 +83,13 @@ Building off of previous day's lab...
 
 Use SendGrid to incorporate emails. You should have email notifications implemented for the followign scenarios:
 
-1. Email confirmation upon registration.
-2. Upon successful completion of an order, email the user a receipt. 
+* [ ] Email confirmation upon registration.
+* [ ] Upon successful completion of an order, email the user a receipt. 
 	- We have not setup a payment process yet, but this should not prevent you from adding an order confirmation process. 
 
+In addition, pleaes add the following to your Account Profile:
+
+* [ ] Ability to review previously submitted orders. 
 
 ## Day 7
 

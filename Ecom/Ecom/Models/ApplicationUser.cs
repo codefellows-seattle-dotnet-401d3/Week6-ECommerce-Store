@@ -10,7 +10,7 @@ namespace Ecom.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public Clans Clan { get; set; }
+        public Guilds Guild { get; set; }
         public Classes Class { get; set; }
     }
 
@@ -20,6 +20,6 @@ namespace Ecom.Models
         public const string Member = "Member";
     }
 
-    public enum Clans { Boar, Snake, Crane, Monkey }
+    public enum Guilds { Boar, Snake, Crane, Monkey }
     public enum Classes { Fighter, Rogue, Ranger, Wizard }
 }

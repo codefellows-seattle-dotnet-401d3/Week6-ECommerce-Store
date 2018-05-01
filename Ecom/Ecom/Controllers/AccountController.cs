@@ -37,7 +37,7 @@ namespace Ecom.Controllers
                     Email = rvm.Email,
                     FirstName = rvm.FirstName,
                     LastName = rvm.LastName,
-                    Clan = rvm.Clan,
+                    Guild = rvm.Guild,
                     Class = rvm.Class
                 };
                 //Create the user in the database using the user manager passed in from config
@@ -49,7 +49,7 @@ namespace Ecom.Controllers
                     Claim nameClaim = new Claim(ClaimTypes.Name, $"{rvm.FirstName} {rvm.LastName}",
                         ClaimValueTypes.String);
                     Claim emailClaim = new Claim(ClaimTypes.Email, rvm.Email, ClaimValueTypes.Email);
-                    Claim clanClaim = new Claim("clanCkeck", rvm.Clan.ToString(), ClaimValueTypes.String); 
+                    Claim clanClaim = new Claim("guildCheck", rvm.Guild.ToString(), ClaimValueTypes.String); 
                     Claim classClaim = new Claim("classCheck", rvm.Class.ToString(), ClaimValueTypes.String);
 
                     myClaims.Add(nameClaim);
@@ -95,7 +95,6 @@ namespace Ecom.Controllers
                 if (result.Succeeded)
                 {
                     var user = await _userManager.FindByEmailAsync(lvm.Email);
-                    var role = await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin);
 
                     if (await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin))
                     {

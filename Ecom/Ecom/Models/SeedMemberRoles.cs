@@ -11,7 +11,7 @@ namespace Ecom.Models
     public class SeedMemberRoles
     {
         private const string AdminEmail = "admin@admin.com";
-        private const string AdminPassword = "@t3st!";
+        private const string AdminPassword = "@T3st!";
 
         private static readonly List<IdentityRole> Roles = new List<IdentityRole>()
       {

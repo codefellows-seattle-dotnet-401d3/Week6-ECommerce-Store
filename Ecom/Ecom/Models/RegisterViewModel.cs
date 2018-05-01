@@ -13,7 +13,7 @@ namespace Ecom.Models
         [Required]
         public string LastName { get; set; }
         [Required]
-        public Clans Clan { get; set; }
+        public Guilds Guild { get; set; }
         [Required]
         public Classes Class { get; set; }
         [Required]

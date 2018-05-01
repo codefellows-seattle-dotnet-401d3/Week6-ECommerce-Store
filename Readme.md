@@ -81,6 +81,12 @@ Building off of previous day's lab...
 
 ## Day 6
 
+Use SendGrid to incorporate emails. You should have email notifications implemented for the followign scenarios:
+
+1. Email confirmation upon registration.
+2. Upon successful completion of an order, email the user a receipt. 
+	- We have not setup a payment process yet, but this should not prevent you from adding an order confirmation process. 
+
 
 ## Day 7
 

@@ -87,6 +87,11 @@ Use SendGrid to incorporate emails. You should have email notifications implemen
 * [ ] Upon successful completion of an order, email the user a receipt. 
 	- We have not setup a payment process yet, but this should not prevent you from adding an order confirmation process. 
 
+	**Note** - Your email notifications should be an external action in a separate controller for usability sake. 
+	Call this method/action with appropraite information whenever you want to prompt an email to be sent. Also, 
+	Make sure that your emails are dynamic, and the 'to' is not hardcdoded. (it is ok for the From to be hardcoded)
+
+
 In addition, pleaes add the following to your Account Profile:
 
 * [ ] Ability to review previously submitted orders. 

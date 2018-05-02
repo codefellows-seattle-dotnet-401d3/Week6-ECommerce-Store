@@ -7,6 +7,58 @@ personal e-commerce store. Be sure to read the directions in it's entirety befor
 <br />
 Pay close attention to the naming conventions specified. 
 
+
+
+# Final Product Summary
+
+## Anonymous User Functionality
+1. View all products within the Ecommerce store
+1. View individual products on their own landing pages
+
+## Member Functionality
+1. View their Profile and do the following:
+	1. Edit personal information
+	1. Change Password
+	1. View Order History 
+		- Just show the items and order total for each
+1. Add items to their cart
+1. Checkout their order
+	- Upon checkout completion, their basket should clear/empty. 
+1. View Receipt/Order Summary of submitted order (immediatly after checkout)
+
+## Admin Functionality
+1. Same abilites as a Member
+1. Access to an Admin Dashboard
+	1. Ability to Add/Update/Delete products
+	1. View all users in the system
+		- Change the role of certain users to promote them to "Admin"
+
+## Readme:
+Your Readme should clearly define the following:
+
+### Product
+What product are your selling?
+
+### Claims
+What claims are you assigning to your users, and where are they being assigned? Why are these claims important?
+
+### Policies
+What policies are you implementing? Why? Where are these policies being enforced?
+
+### OAUTH
+Who are your OAUTH providers?
+
+### Email
+Where are your emails being sent? What triggers them?
+
+### Code Coverage:
+What is your code coverage?
+
+### Azure Deployment
+What is your deployed link?
+
+
+
 ## Day 1 - Intro to Identity
 
 * [ ] Create a brand new empty web application in Visual Studio. 
@@ -96,14 +148,14 @@ In addition, pleaes add the following to your Account Profile:
 
 ## Day 7
 Building off of Day 6....
-1. Complete your e-commerce site by creating a Sandbox account within Auth.Net.
-1. Integrate Auth.NET as your payment processor for your e-commerce site.
-1. Seperate out your payment processing into a model named `Payment`.
+* [ ] Complete your e-commerce site by creating a Sandbox account within Auth.Net.
+* [ ] Integrate Auth.NET as your payment processor for your e-commerce site.
+* [ ] Seperate out your payment processing into a model named `Payment`.
 	- Consider creating a database table that stores all of the `Transactions` that take place within AUTH.NET
-1. Have a disclaimer on your checkout page that informs the user that this is a "fake" site, and that no real credit
+* [ ] Have a disclaimer on your checkout page that informs the user that this is a "fake" site, and that no real credit
 card information should be entered. 
-1. Upon completion of the order, generate a receipt/order summary page for the user
-1. Save the Order history for each user, and allow them to view all previously submitted orders on their
+* [ ] Upon completion of the order, generate a receipt/order summary page for the user
+* [ ] Save the Order history for each user, and allow them to view all previously submitted orders on their
 MyAccount page. 
 	- HINT: Create an OrderHistory table in the database that saves all the orders that have been created. 
 
@@ -114,52 +166,3 @@ MyAccount page.
 * [ ] Web Site is Usable
 * [ ] Front End design is "Client Ready" (it looks nice)
 * [ ] Website is deployed to Azure
-
-
-# Final Product Summary
-
-## Anonymous User Functionality
-1. View all products within the Ecommerce store
-1. View individual products on their own landing pages
-
-## Member Functionality
-1. View their Profile and do the following:
-	1. Edit personal information
-	1. Change Password
-	1. View Order History 
-		- Just show the items and order total for each
-1. Add items to their cart
-1. Checkout their order
-	- Upon checkout completion, their basket should clear/empty. 
-1. View Receipt/Order Summary of submitted order (immediatly after checkout)
-
-## Admin Functionality
-1. Same abilites as a Member
-1. Access to an Admin Dashboard
-	1. Ability to ADD/Update/Delete products
-	1. View all users in the system
-		- Change the role of certain users to promote them to "Admin"
-
-## Readme:
-Your Readme should clearly define the following:
-
-### Product
-What product are your selling?
-
-### Claims
-What claims are you assigning to your users, and where are they being assigned? Why are these claims important?
-
-### Policies
-What policies are you implementing? Why? Where are these policies being enforced?
-
-### OAUTH
-Who are your OAUTH providers?
-
-### Email
-Where are your emails being sent? What triggers them?
-
-### Code Coverage:
-What is your code coverage?
-
-### Azure Deployment
-What is your deployed link?

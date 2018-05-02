@@ -4,12 +4,15 @@
 This is a multi-day assignment. Take the topics from each day of lecture, and apply them to your 
 personal e-commerce store. Be sure to read the directions in it's entirety before beginning.
 
-<br />
 Pay close attention to the naming conventions specified. 
 
-
+<hr />
+<hr />
 
 # Final Product Summary
+Below are the final outcomes and responsibilities for each of the members within the site. 
+
+**Total points for this assignment: 100pts**
 
 ## Anonymous User Functionality
 1. View all products within the Ecommerce store

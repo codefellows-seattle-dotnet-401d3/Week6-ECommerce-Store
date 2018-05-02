@@ -27,63 +27,52 @@ namespace ECommerce.Controllers
             _signInManager = signInManager;
         }
 
-        [TempData]
-        public string ErrorMessage { get; set; }
 
         [HttpGet]
-        public async Task<IActionResult> Login(string returnUrl = null)
+        public async Task<IActionResult> Login()
         {
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
-            ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
             if (ModelState.IsValid)
             {
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    return RedirectToLocal(returnUrl);
+                    var user = await _userManager.FindByEmailAsync(model.Email);
+                    var role = await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin);
+
+                    if(await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin))
+                    {
+                        return RedirectToAction("Index", "Admin");
+                    }
+                    return RedirectToAction("Index", "Home");
                 }
-                if (result.IsLockedOut)
-                {
-                    return RedirectToAction(nameof(Lockout));
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt");
-                    return View(model);
-                }
+
+                ModelState.AddModelError(string.Empty, "Invalid login");
+               
             }
 
             return View(model);
         }
 
         [HttpGet]
-        public IActionResult Lockout()
+        public IActionResult Register()
         {
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult Register(string returnUrl = null)
-        {
-            ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser
+                var user = new ApplicationUser()
                 {
                     UserName = model.Email,
                     Email = model.Email,
@@ -122,11 +111,10 @@ namespace ECommerce.Controllers
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            return RedirectToAction("Index", "Home");
         }
 
         private void AddErrors(IdentityResult result)

@@ -25,10 +25,6 @@ namespace ECommerce.Models
                 ConcurrencyStamp = Guid.NewGuid().ToString()}
         };
 
-        internal static void AddUserRoles(IServiceProvider services)
-        {
-            throw new NotImplementedException();
-        }
 
         public static void seedData(IServiceProvider sp, UserManager<ApplicationUser> um)
         {

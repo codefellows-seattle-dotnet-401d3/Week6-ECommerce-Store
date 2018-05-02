@@ -33,13 +33,11 @@ namespace ECommerce
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddDbContext<ProductDbContext>(options =>
-            {
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-            });
+            //services.AddDbContext<ProductDbContext>(options =>
+            //{
+            //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            //});
 
-            // services.AddDbContext<ApplicationDbContext>(options =>
-            //     options.UseInMemoryDatabase(Guid.NewGuid().ToString()));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -47,8 +45,7 @@ namespace ECommerce
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("Admin", policy => policy.RequireRole(ApplicationRoles.Admin));
-                options.AddPolicy("Member", policy => policy.RequireRole(ApplicationRoles.Member));
+                options.AddPolicy("AdminOnly", policy => policy.RequireRole(ApplicationRoles.Admin));
                 options.AddPolicy("Over21", policy => policy.Requirements.Add(new MinimumAgeRequirement(21)));
             });
 

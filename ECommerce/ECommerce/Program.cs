@@ -25,7 +25,7 @@ namespace ECommerce
                 var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
                 try
                 {
-                    //ProductSeedData.Initialize(services);
+                    ProductSeedData.Initialize(services);
                     SeedMemberRoles.seedData(services, userManager);
                 }
                 catch (Exception e)

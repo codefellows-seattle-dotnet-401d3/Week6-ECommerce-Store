@@ -18,4 +18,6 @@ namespace ECommerce.Models
         public const string Admin = "Admin";
         public const string Member = "Member";
     }
+
+    public enum StarWars{ I, II, III, IV, V, VI, VII, IIX }
 }

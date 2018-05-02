@@ -10,7 +10,7 @@ Pay close attention to the naming conventions specified.
 <hr />
 
 # Final Product Summary
-Below are the final outcomes and responsibilities for each of the members within the site as well as the minimum ReadMe requirements
+Below are the final outcomes and responsibilities for each of the Roles within the site as well as the minimum ReadMe requirements
 
 **Total points for this assignment: 100pts**
 

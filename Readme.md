@@ -29,7 +29,6 @@ Adding onto your previous day's lab...
 * [ ] Upon Registration add onto your user a variety of claims
 * [ ] Assign users upon registration to a "MEMBER" user role. 
 * [ ] Create a controller called *ProductsController* that allows you to do the standard CRUD operations on Products (you are allowed to scaffold, if you wish).
-	* [ ] Make this Products Controller accessible only by Authorized/Logged in users
 	* [ ] Make the Register and the Login Actions in the AccountController accessible by anonymous users
 * [ ] Upon login, If the User is a member, redirect them to a Shopping landing page (you will have to create this)
 * [ ] Upon login, If the user is an Admin, Redirect them to an Admin Dashboard that displays all of the products that are 
@@ -61,12 +60,12 @@ store has to offer. Display an image of the item, it's name, and the price.
 
 ## Day 4
 
- Buildig off of previous day's lab....
+ Building off of previous day's lab....
 
  * [ ] Implement a `BasketDetails` view component into your site. This should live on your shopping pages(make sure it's on more than one page) to inform the users
  of all the items in their carts.
  * [ ] Make a Product landing page that is accessed whenever a user selects a product. This product landing page will show the product details, as well as 
- an option to "Add to cart".
+ an option to "Add to cart". 
 
  ### Hints with BasketItems
  There are a couple different ways to hold onto your user's basket items. here are a couple of hints...
@@ -77,10 +76,9 @@ store has to offer. Display an image of the item, it's name, and the price.
 ## Day 5
 Building off of previous day's lab...
 * [ ] Incorporate at least 2 OAUTH external login providers into your site. 
-
+* [ ] Be sure to capture the user's email if they choose to login through OAUTH provider
 
 ## Day 6
-
 Use SendGrid to incorporate emails. You should have email notifications implemented for the followign scenarios:
 
 * [ ] Email confirmation upon registration.
@@ -97,6 +95,18 @@ In addition, pleaes add the following to your Account Profile:
 * [ ] Ability to review previously submitted orders. 
 
 ## Day 7
+Building off of Day 6....
+1. Complete your e-commerce site by creating a Sandbox account within Auth.Net.
+1. Integrate Auth.NET as your payment processor for your e-commerce site.
+1. Seperate out your payment processing into a model named `Payment`.
+	- Consider creating a database table that stores all of the `Transactions` that take place within AUTH.NET
+1. Have a disclaimer on your checkout page that informs the user that this is a "fake" site, and that no real credit
+card information should be entered. 
+1. Upon completion of the order, generate a receipt/order summary page for the user
+1. Save the Order history for each user, and allow them to view all previously submitted orders on their
+MyAccount page. 
+	- HINT: Create an OrderHistory table in the database that saves all the orders that have been created. 
+
 
 ## Final Milestones
 
@@ -104,3 +114,52 @@ In addition, pleaes add the following to your Account Profile:
 * [ ] Web Site is Usable
 * [ ] Front End design is "Client Ready" (it looks nice)
 * [ ] Website is deployed to Azure
+
+
+# Final Product Summary
+
+## Anonymous User Functionality
+1. View all products within the Ecommerce store
+1. View individual products on their own landing pages
+
+## Member Functionality
+1. View their Profile and do the following:
+	1. Edit personal information
+	1. Change Password
+	1. View Order History 
+		- Just show the items and order total for each
+1. Add items to their cart
+1. Checkout their order
+	- Upon checkout completion, their basket should clear/empty. 
+1. View Receipt/Order Summary of submitted order (immediatly after checkout)
+
+## Admin Functionality
+1. Same abilites as a Member
+1. Access to an Admin Dashboard
+	1. Ability to ADD/Update/Delete products
+	1. View all users in the system
+		- Change the role of certain users to promote them to "Admin"
+
+## Readme:
+Your Readme should clearly define the following:
+
+### Product
+What product are your selling?
+
+### Claims
+What claims are you assigning to your users, and where are they being assigned? Why are these claims important?
+
+### Policies
+What policies are you implementing? Why? Where are these policies being enforced?
+
+### OAUTH
+Who are your OAUTH providers?
+
+### Email
+Where are your emails being sent? What triggers them?
+
+### Code Coverage:
+What is your code coverage?
+
+### Azure Deployment
+What is your deployed link?

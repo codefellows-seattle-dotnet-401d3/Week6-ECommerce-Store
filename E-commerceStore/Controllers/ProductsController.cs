@@ -18,7 +18,6 @@ namespace EcommerceStore.Controllers
         public IActionResult Index()
         {
             return View();
-            Adding Shit
         }
 
     }

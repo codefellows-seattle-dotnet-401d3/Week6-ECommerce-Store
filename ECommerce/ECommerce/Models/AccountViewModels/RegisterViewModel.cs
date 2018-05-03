@@ -19,6 +19,7 @@ namespace ECommerce.Models.AccountViewModels
         public string Email { get; set; }
 
         [Required]
+        [DataType(DataType.Date)]
         public DateTime Birthday { get; set; }
 
         [Required]

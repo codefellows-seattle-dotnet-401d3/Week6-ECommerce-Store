@@ -15,8 +15,11 @@ namespace ECommerce.Models
 
     public static class ApplicationRoles
     {
-        public const string Admin = "Admin";
-        public const string Member = "Member";
+        public static string Admin => "Admin";
+        public static string AdminNormalized => Admin.ToUpper();
+
+        public static string Member => "Member";
+        public static string MemberNormalized => Member.ToUpper();
     }
 
     public enum StarWars{ I, II, III, IV, V, VI, VII, IIX }

@@ -33,10 +33,10 @@ namespace ECommerce
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            //services.AddDbContext<ProductDbContext>(options =>
-            //{
-            //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-            //});
+            services.AddDbContext<ProductDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            });
 
 
             services.AddIdentity<ApplicationUser, IdentityRole>()

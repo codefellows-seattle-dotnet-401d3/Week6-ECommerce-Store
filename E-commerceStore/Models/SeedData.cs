@@ -50,9 +50,6 @@ namespace EcommerceStore.Models
 
 
 
-
-
-
                 );
                 context.SaveChanges();
             }

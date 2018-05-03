@@ -19,16 +19,18 @@ namespace EcommerceStore
         public static void Main(string[] args)
         {
             var host = BuildWebHost(args);
-            var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+         
+            //var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
 
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
+                var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
 
                 try
                 {
                     SeedData.Initialize(services);
-                    SeedMemberRoles.SeedData(services, userManager);
+                   SeedMemberRoles.SeedData(services, userManager);
                 }
                 catch (Exception ex)
                 {
@@ -39,9 +41,6 @@ namespace EcommerceStore
 
             host.Run();
         }
-
-
-
 
 
         public static IWebHost BuildWebHost(string[] args) =>

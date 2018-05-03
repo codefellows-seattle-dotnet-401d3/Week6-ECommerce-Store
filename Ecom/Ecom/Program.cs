@@ -24,6 +24,7 @@ namespace Ecom
                 var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
 
                 SeedMemberRoles.SeedData(services, userManager);
+                SeedProducts.Initialize(services);
             }
             host.Run();
         }

@@ -28,4 +28,7 @@ Scope -> camel case local variable must be lower case. emailClaim. If not (class
 /// -> triple comments 
 //
 
---Remove var role - this line of code is never touched. 
+--Remove var role - this line of code is never touched. d
+
+++Rember to add this at the Nuget Package level.
+add-migration Product -Context ProductDbContext

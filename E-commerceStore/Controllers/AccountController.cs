@@ -54,7 +54,7 @@ namespace EcommerceStore.Controllers
                     FirstName = rvm.FirstName,
                     LastName = rvm.LastName,
                     BirthDate = rvm.Birthday,
-                    Music = rvm.Music,
+                   // Music = rvm.Music,
                     MusicType = rvm.MusicType
 
                 };
@@ -93,7 +93,7 @@ namespace EcommerceStore.Controllers
 
 
 
-                    Claim MusicFanClaim = new Claim("MusicFanCheck", rvm.Music.ToString(), ClaimValueTypes.String);
+                   // Claim MusicFanClaim = new Claim("MusicFanCheck", rvm.Music.ToString(), ClaimValueTypes.String);
                     Claim MusicTypeClaim = new Claim("MusicType", rvm.MusicType.ToString(), ClaimValueTypes.String);
 
 
@@ -101,7 +101,7 @@ namespace EcommerceStore.Controllers
                     myClaims.Add(Nameclaim);
                     myClaims.Add(Emailclaim);
                     myClaims.Add(Birthdayclaim);
-                    myClaims.Add(MusicFanClaim);
+                    //myClaims.Add(MusicFanClaim);
                     myClaims.Add(MusicTypeClaim);
 
 

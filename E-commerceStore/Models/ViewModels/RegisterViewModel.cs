@@ -42,9 +42,6 @@ namespace EcommerceStore.Models.ViewModels
         [Compare("Password", ErrorMessage = "The Password No match")]
         public string ConfirmPassword { get; set; }
 
-        //Do you like music
-        [Required]
-        public bool Music { get; set; }
 
         //Type of music
         [Required]

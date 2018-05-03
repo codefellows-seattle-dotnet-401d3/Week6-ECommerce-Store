@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\E-commerceStore",
+    "\\E-commerceStore\\Data",
     "\\E-commerceStore\\Models"
   ],
-  "SelectedNode": "\\E-commerceStore\\Models\\SeedMemberRoles.cs",
+  "SelectedNode": "\\E-commerceStore\\Data\\ApplicationDbContext.cs",
   "PreviewInSolutionExplorer": false
 }

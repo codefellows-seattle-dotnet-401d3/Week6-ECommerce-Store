@@ -28,7 +28,7 @@ namespace EcommerceStore.Models
         public const string Member = "Member";
     }
 
-    public enum MusicType { Country, Pop, Rock, }
-    public enum Music {yes, no, }
+    public enum MusicType { Country, Pop, Rock, Jazz }
+    
 
 }

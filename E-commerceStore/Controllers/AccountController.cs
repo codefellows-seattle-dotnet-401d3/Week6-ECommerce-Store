@@ -126,7 +126,7 @@ namespace EcommerceStore.Controllers
 
 
                     //
-                    RedirectToAction("Index", "Home"); //REDIRECTS INDEX IN HOME
+                   return RedirectToAction("Index", "Home"); //REDIRECTS INDEX IN HOME
                 }
 
             }

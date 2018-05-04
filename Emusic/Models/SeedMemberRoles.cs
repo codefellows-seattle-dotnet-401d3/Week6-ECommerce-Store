@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EcommerceStore.Models
+namespace Emusic.Models
 {
-    public class SeedData
+    public class SeedMemberRoles
     {
     }
 }

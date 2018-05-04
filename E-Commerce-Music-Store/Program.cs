@@ -7,6 +7,10 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using E_Commerce_Music_Store;
+using E_Commerce_Music_Store.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace E_Commerce_Music_Store
 {
@@ -14,12 +18,42 @@ namespace E_Commerce_Music_Store
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            var host = BuildWebHost(args);
+
+            //Creates scope using dependency injections
+            using (var scope = host.Services.CreateScope())
+            {
+                //
+                var services = scope.ServiceProvider;
+                var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+
+                try
+                {
+                    //SeedMemberRoles.SeedData(services, userManager);
+
+                    //SeedMemberRoles.SeedData(services, userManager); --> seed the products data here.
+                }
+                catch (Exception ex)
+                {
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(ex, "An error occurred seeding the DB.");
+                }
+
+                host.Run();
+            }
+
         }
+
+
+
+
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
                 .Build();
-    }
+
+
+    }//Bottom of the Program
+    
 }

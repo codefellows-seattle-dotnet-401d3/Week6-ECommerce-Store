@@ -10,17 +10,18 @@ namespace ECommerce.Models
     {
         [MinLength(3)]
         [Required]
-        public string ProductName { get; set; }
+        public string Name { get; set; }
 
         [Required]
-        public double ProductPrice { get; set; }
-
-        [MinLength(10)]
-        [Required]
-        public string ProductDescription { get; set; }
+        public double Price { get; set; }
 
         [MinLength(10)]
         [Required]
-        public string ProductImage { get; set; }
+        public string Description { get; set; }
+
+        [MinLength(10)]
+        [Required]
+        public string ImagePath { get; set; }
     }
 }
+

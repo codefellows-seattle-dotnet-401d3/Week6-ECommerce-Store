@@ -1,0 +1,19 @@
+﻿@model ECommerce.Models.Product
+@{ 
+
+}
+
+<h2>Delete Product</h2>
+
+<dl>
+    <dt>@Html.DisplayFor(product => product.Name)</dt>
+    <dt>@Html.DisplayFor(product => product.Price)</dt>
+    <dt>@Html.DisplayFor(product => product.Description)</dt>
+    <dt>@Html.DisplayFor(product => product.ImagePath)</dt>
+</dl>
+
+<form class="form-group" asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <input type="submit" value="Delete" />
+    <a asp-action="Index">Back to Product home</a>
+</form>

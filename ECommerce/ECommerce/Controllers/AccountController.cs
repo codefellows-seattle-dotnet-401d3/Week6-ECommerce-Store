@@ -102,7 +102,7 @@ namespace ECommerce.Controllers
                     await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
                     await _signInManager.SignInAsync(user, isPersistent: false);
 
-                    RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home");
                 }
             }
 

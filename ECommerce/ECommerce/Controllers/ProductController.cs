@@ -23,7 +23,7 @@ namespace ECommerce.Controllers
         {
             return View(new ProductViewModel()
             {
-                Products = await _context.Product.Include(p => p.Name).ToListAsync()
+                Products = await _context.Product.ToListAsync()
             });
         }
 
@@ -39,10 +39,10 @@ namespace ECommerce.Controllers
 
             Product product = new Product()
             {
-                Name = vm.ProductName,
-                Price = vm.ProductPrice,
-                Description = vm.ProductDescription,
-                ImagePath = vm.ProductImage
+                Name = vm.Name,
+                Price = vm.Price,
+                Description = vm.Description,
+                ImagePath = vm.ImagePath
             };
 
             await _context.Product.AddAsync(product);

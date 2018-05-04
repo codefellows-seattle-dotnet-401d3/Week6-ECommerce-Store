@@ -1,0 +1,32 @@
+﻿@model ECommerce.Models.ProductCreateViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h2>Registration</h2>
+
+<form method="post">
+    <h3>Create an Account</h3>
+
+    <div>
+        <label asp-for="Name">Product Name</label>
+        <input class="form-control" asp-for="Name" />
+    </div>
+
+    <div>
+        <label asp-for="Price">Price</label>
+        <input class="form-control" asp-for="Price" />
+    </div>
+
+    <div>
+        <label asp-for="Description">Description</label>
+        <input class="form-control" asp-for="Description" />
+    </div>
+
+    <div>
+        <label asp-for="ImagePath">Image File Path</label>
+        <input class="form-control" asp-for="ImagePath" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

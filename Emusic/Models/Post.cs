@@ -7,9 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 using EcommerceStore.Models;
 using EcommerceStore.Data;
 
-namespace EcommerceStore.Models
+namespace Emusic.Models
 {
-    public class SeedData
+    public class Post
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {

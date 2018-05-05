@@ -17,6 +17,9 @@ namespace Emusic.Models.ViewModels
             [DataType(DataType.Password)]
             public string Password { get; set; }
             public bool RememberMe { get; set; }
-        }
+
+            [Display(Name = "Keep Me Signed In")]
+            public bool KeepSignedIn;
+    }
     
 }

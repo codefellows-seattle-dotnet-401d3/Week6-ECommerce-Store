@@ -24,7 +24,6 @@ namespace Emusic.Models.ViewModels
 
         [Required]
         [Display(Name = "Favorite Color")]
-
         public string FavoriteColor { get; set; }
 
         [Required]
@@ -37,7 +36,10 @@ namespace Emusic.Models.ViewModels
         [Compare("Password", ErrorMessage = "The Password and comfirmation do not match")]
         public string ConfirmPassword { get; set; }
 
-
+        [Required]
+        [EnumDataType(typeof(MusicType))]
+        [Display(Name = "Music Type")]
+        public MusicType MusicType { get; set; }
 
 
     }

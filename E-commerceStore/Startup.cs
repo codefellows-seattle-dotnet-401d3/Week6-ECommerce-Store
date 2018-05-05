@@ -17,7 +17,7 @@ namespace EcommerceStore
 {
     public class Startup
     {
-        //enable configuration setup, dependancy injection
+        //enable configuration setup, dependancy injectiond
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;

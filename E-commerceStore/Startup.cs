@@ -37,9 +37,11 @@ namespace EcommerceStore
             // adding the Database
             services.AddDbContext<ApplicationDbContext>(options=>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            
-            //POSSIBLY ADD A ANOTHER DB CONTEXT FOR PRODUCTS.
-            
+
+            services.AddDbContext<ProductDbContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+
             /*This is the Configure file for setting up using a Identity database*/
             //Application user- > 
             //IdentityRole -> 
@@ -47,6 +49,8 @@ namespace EcommerceStore
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+
 
 
             //This line adds the policy to the role

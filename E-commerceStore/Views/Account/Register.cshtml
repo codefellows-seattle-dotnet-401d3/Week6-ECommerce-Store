@@ -46,12 +46,6 @@
         <input asp-for="ConfirmPassword" />
     </div>
 
-
-    <div>
-        <label asp-for="Music"> music you like? </label>
-        <select asp-for="Music" asp-items="@Html.GetEnumSelectList(typeof(Music))"></select>
-    </div>
-
     <div>
         <label asp-for="MusicType"> What kind of music do you like? </label>
         <select asp-for="MusicType" asp-items="@Html.GetEnumSelectList(typeof(MusicType))"></select>

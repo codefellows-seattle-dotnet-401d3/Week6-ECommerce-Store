@@ -32,6 +32,7 @@ namespace Emusic.Controllers
         {
             new Claim(ClaimTypes.Name, $"{user.LastName}, {user.FirstName}", ClaimValueTypes.String),
             new Claim(ClaimTypes.Email, user.NormalizedEmail, ClaimValueTypes.Email),
+            //place one claim here
         };
 
         [HttpGet]
@@ -86,6 +87,14 @@ namespace Emusic.Controllers
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
             return View(new RegisterViewModel());
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
 
 
 

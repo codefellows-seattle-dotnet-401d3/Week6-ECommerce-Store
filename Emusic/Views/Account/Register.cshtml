@@ -1,0 +1,53 @@
+﻿@model Emusic.Models.ViewModels.RegisterViewModel
+
+@{ 
+    ViewBag.Title = "Register";
+}
+
+Hello To the register Page
+
+<h2>Register </h2>
+
+<form method="post" asp-action="Register">
+    <h2>Create a New Account </h2>
+
+    <div>
+        <label asp-for="Email">Email</label>
+        <input asp-for="Email" />
+    </div>
+
+    <div>
+        <label asp-for="FirstName">First Name</label>
+        <input asp-for="FirstName" />
+    </div>
+
+    <div>
+        <label asp-for="LastName">Last Name</label>
+        <input asp-for="LastName" />
+    </div>
+
+    <div>
+        <label asp-for="Birthday">Birthday</label>
+        <input asp-for="Birthday" />
+    </div>
+
+    <div>
+        <label asp-for="Password">Password</label>
+        <input asp-for="Password" />
+    </div>
+    <div>
+        <label asp-for="ConfirmPassword">Confirm Password</label>
+        <input asp-for="ConfirmPassword" />
+    </div>
+
+    <div>
+        <label asp-for="MusicType"> What kind of music do you like? </label>
+        <select asp-for="MusicType" asp-items="@Html.GetEnumSelectList(typeof(MusicType))"></select>
+    </div>
+
+    <button type="submit"> Register</button>
+
+
+
+
+</form>

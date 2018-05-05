@@ -1,0 +1,30 @@
+﻿@model Emusic.Models.ViewModels.LoginViewModel
+
+@{
+    ViewBag.Title = "Login";
+ }
+
+<h2> Welcome to the Login Page </h2>
+
+<!--   Login method -->
+<form method="post" asp-action="Login">
+    <h2> Welcome-Back User </h2>
+    <div asp-validation-summary="All"> </div>
+
+    <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email" />
+        <span asp-validation-for="Email"></span>
+    </div>
+
+    <div>
+        <label asp-for="Password"></label>
+        <input asp-for="Password" />
+        <span asp-validation-for="Password"></span>
+    </div>
+
+    <div>
+        <button type="submit"> Login - IN </button> 
+    </div>
+
+</form>

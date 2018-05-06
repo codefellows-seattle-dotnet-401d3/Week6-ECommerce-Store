@@ -1,20 +1,22 @@
 ﻿@model Emusic.Models.ViewModels.RegisterViewModel
 
-@{ 
+@{
     ViewBag.Title = "Register";
 }
 
 Hello To the register Page
 
-<h2>Register </h2>
+<<h2> Register</h2>
 
-<form method="post" asp-action="Register">
-    <h2>Create a New Account </h2>
+<form method="post">
+    <h4>Create a new account.</h4>
+    <hr />
 
     <div>
         <label asp-for="Email">Email</label>
         <input asp-for="Email" />
     </div>
+
 
     <div>
         <label asp-for="FirstName">First Name</label>
@@ -24,11 +26,6 @@ Hello To the register Page
     <div>
         <label asp-for="LastName">Last Name</label>
         <input asp-for="LastName" />
-    </div>
-
-    <div>
-        <label asp-for="Birthday">Birthday</label>
-        <input asp-for="Birthday" />
     </div>
 
     <div>
@@ -46,8 +43,6 @@ Hello To the register Page
     </div>
 
     <button type="submit"> Register</button>
-
-
-
-
 </form>
+
+<h1>@@test123T</h1>

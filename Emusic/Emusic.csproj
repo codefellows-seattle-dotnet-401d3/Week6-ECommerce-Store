@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <Folder Include="Components\" />
-    <Folder Include="Models\Polices\" />
     <Folder Include="Views\Post\" />
   </ItemGroup>
 

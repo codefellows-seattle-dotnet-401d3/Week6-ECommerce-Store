@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emusic", "Emusic\Emusic.csproj", "{07BBC6F3-D95A-4B73-BB1F-C2D6C4F8F05A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Emusic", "Emusic\Emusic.csproj", "{07BBC6F3-D95A-4B73-BB1F-C2D6C4F8F05A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C6CC33B5-A24E-4856-8516-1BE7BDC060D7}"
+	ProjectSection(SolutionItems) = preProject
+		E-CommerceStore Rubric.txt = E-CommerceStore Rubric.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

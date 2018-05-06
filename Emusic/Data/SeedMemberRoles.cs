@@ -16,69 +16,87 @@ namespace Emusic.Models
         private const string AdminPassword = "@test123T"; // upper case password?? Use this to debug the password. if you are missing the 
 
         private static readonly List<IdentityRole> Roles = new List<IdentityRole>()
-      {
+        {
           new IdentityRole{Name=ApplicationRoles.Admin,
               NormalizedName = ApplicationRoles.Admin.ToUpper(),
               ConcurrencyStamp = Guid.NewGuid().ToString()
 
           },
+
           new IdentityRole{Name=ApplicationRoles.Member,
           NormalizedName = ApplicationRoles.Member.ToUpper(),
           ConcurrencyStamp = Guid.NewGuid().ToString()
+          }
 
-      }
-      };
+        };
+    
 
-
-        public static void SeedData(IServiceProvider serviceProvider, UserManager<ApplicationUser> userManager)
+        public static async Task Initialize(IServiceProvider services,
+          UserManager<ApplicationUser> userManager)
         {
-            using (var dbContext =
-                new ApplicationDbContext(serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
+            using (ApplicationDbContext context = new ApplicationDbContext(
+                services.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
             {
-                dbContext.Database.EnsureCreated();
-                AddRoles(dbContext);
-                AddUser(dbContext, userManager);
-                AddUserRoles(dbContext);
-            }
+                await context.Database.EnsureCreatedAsync();
 
-        }
-
-        private static void AddRoles(ApplicationDbContext dbContext)
-        {
-            if (dbContext.Roles.Any()) return;
-            foreach (var role in Roles)
-            {
-                dbContext.Roles.Add(role);
-                dbContext.SaveChanges();
+                await AddRoles(context);
+                await AddAdminUser(context, userManager);
+                await AddUserRoles(context);
             }
         }
 
-        private static async void AddUser(ApplicationDbContext dbContext, UserManager<ApplicationUser> userManager)
+        public static async Task AddRoles(ApplicationDbContext context)
         {
-            if (dbContext.Users.Any()) return;
-            var user = new ApplicationUser()
+            if (await context.Roles.AnyAsync())
+            {
+                return;
+            }
+
+            await context.Roles.AddRangeAsync(Roles);
+            await context.SaveChangesAsync();
+        }
+
+
+        public static async Task AddAdminUser(ApplicationDbContext context,
+            UserManager<ApplicationUser> userManager)
+        {
+            if (await context.Users.AnyAsync())
+            {
+                return;
+            }
+
+            ApplicationUser user = new ApplicationUser()
             {
                 UserName = AdminEmail,
+                NormalizedUserName = AdminEmail.ToUpper(),
                 Email = AdminEmail,
+                NormalizedEmail = AdminEmail.ToUpper(),
                 EmailConfirmed = true,
+                ConcurrencyStamp = Guid.NewGuid().ToString()
             };
+
             await userManager.CreateAsync(user, AdminPassword);
         }
 
-        private static void AddUserRoles(ApplicationDbContext dbContext)
+        public static async Task AddUserRoles(ApplicationDbContext context)
         {
-            if (dbContext.UserRoles.Any()) return;
-            var userRole = new IdentityUserRole<string>
+            if (await context.UserRoles.AnyAsync())
             {
-                UserId = dbContext.Users.Single(r => r.Email == AdminEmail).Id,
-                RoleId = dbContext.Roles.Single(r => r.Name == ApplicationRoles.Admin).Id
+                return;
+            }
+
+            IdentityUserRole<string> userRole = new IdentityUserRole<string>()
+            {
+                UserId = (await context.Users.SingleAsync(u => u.UserName == AdminEmail)).Id,
+                RoleId = (await context.Roles.SingleAsync(r => r.Name == ApplicationRoles.Admin)).Id
             };
-            dbContext.UserRoles.Add(userRole);
-            dbContext.SaveChanges();
+
+            await context.AddAsync(userRole);
+            await context.SaveChangesAsync();
         }
 
 
 
-    }
+    }//Bottom of the SeedMember Roles
 }
 

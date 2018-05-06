@@ -1,0 +1,10 @@
+﻿body {
+    background-color: dodgerblue;
+}
+
+#NavigationBar {
+    background-image: url('../images/live.png');
+    background-repeat: no-repeat;
+    background-size: auto;
+    
+}

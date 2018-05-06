@@ -10,9 +10,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-
 using Emusic.Models;
 using Emusic.Data;
+using Emusic.Models.Policies;
+
 
 namespace Emusic
 {
@@ -42,6 +43,18 @@ namespace Emusic
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminOnly", policy => policy.RequireRole(ApplicationRoles.Admin));
+                options.AddPolicy("AdminOnly", policy => policy.RequireRole(ApplicationRoles.Admin));
+
+             
+            });
+
+            services.AddSingleton<IAuthorizationHandler, MusicHandler>();
+
+
 
         }
 

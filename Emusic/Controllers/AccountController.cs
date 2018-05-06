@@ -143,6 +143,7 @@ namespace Emusic.Controllers
 
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel lvm)
         {
             if (ModelState.IsValid)
@@ -156,11 +157,11 @@ namespace Emusic.Controllers
 
                     if (await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin))
                     {
-                        return RedirectToAction("Index", "Admin");
+                        return RedirectToAction( "Index", "Products");
 
                     }
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Shop");
                 }
 
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
@@ -171,12 +172,13 @@ namespace Emusic.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Login()
         {
             //clear all external logins to ensure a new and clean login
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
-            return View();
+            return View(new LoginViewModel());
         }
     }
 

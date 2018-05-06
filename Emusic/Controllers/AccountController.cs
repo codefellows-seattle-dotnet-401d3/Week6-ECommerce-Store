@@ -157,7 +157,7 @@ namespace Emusic.Controllers
 
                     if (await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin))
                     {
-                        return RedirectToAction( "Index", "Products");
+                        return RedirectToAction("Index", "Products");
 
                     }
 

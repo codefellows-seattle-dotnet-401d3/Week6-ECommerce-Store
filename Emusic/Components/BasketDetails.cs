@@ -27,7 +27,7 @@ namespace Emusic.Components
         {
             // Always create a view model to avoid the view component view trying
             // to take the current action's model (possible MVC bug?)
-            BasketDetailsViewModel bvm = new BasketDetailsViewModel();
+            BaskeDetailsViewModel bvm = new BaskeDetailsViewModel();
 
             long? currentBasketId =
                 (await _userManager.GetUserAsync(HttpContext.User))?.CurrentBasketId;

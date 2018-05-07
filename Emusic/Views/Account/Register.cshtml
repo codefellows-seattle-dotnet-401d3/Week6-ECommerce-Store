@@ -39,7 +39,7 @@ Hello To the register Page
 
     <div>
         <label asp-for="MusicType"> What kind of music do you like? </label>
-        <select asp-for="MusicType" asp-items="@Html.GetEnumSelectList(typeof(MusicType))"></select>
+        <select asp-for="MusicType" asp-items="@Html.GetEnumSelectList(typeof(Genre))"></select>
     </div>
 
     <button type="submit"> Register</button>

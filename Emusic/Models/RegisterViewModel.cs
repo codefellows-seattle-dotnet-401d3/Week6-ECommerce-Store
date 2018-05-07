@@ -42,12 +42,12 @@ namespace Emusic.Models.ViewModels
         [Compare("Password", ErrorMessage = "The Password  do not match")]
         public string ConfirmPassword { get; set; }
 
-        [Required]
+        //[Required]
         [EnumDataType(typeof(Genre))]
         [Display(Name = "MusicType")]
         public Genre MusicType { get; set; }
 
-        [Required]
+        //[Required]
         [EnumDataType(typeof(MusicVenue))]
         [Display(Name = "MusicVenue")]
         public MusicVenue MusicVenue { get; set; }

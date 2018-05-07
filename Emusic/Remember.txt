@@ -1,2 +1,3 @@
 add-migration newPRoduct -Context ProductDbContext
 update-database -Context ProductDbContext
+-Remember to remove non-Null Values

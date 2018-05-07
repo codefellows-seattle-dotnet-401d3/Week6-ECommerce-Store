@@ -44,15 +44,7 @@ namespace Emusic
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("AdminOnly", policy => policy.RequireRole(ApplicationRoles.Admin));
-                options.AddPolicy("AdminOnly", policy => policy.RequireRole(ApplicationRoles.Admin));
-
-             
-            });
-
-
+    
             services.AddAuthorization(options =>
             {
                 options.AddPolicy(ApplicationPolicies.AdminOnly, p => p.RequireRole(ApplicationRoles.Admin));

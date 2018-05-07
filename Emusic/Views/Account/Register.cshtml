@@ -8,41 +8,49 @@ Hello To the register Page
 
 <<h2> Register</h2>
 
-<form method="post">
-    <h4>Create a new account.</h4>
-    <hr />
+ <form method="post">
+     <h4>Create a new account.</h4>
+     <hr />
 
-    <div>
-        <label asp-for="Email">Email</label>
-        <input asp-for="Email" />
-    </div>
+     <div>
+         <label asp-for="Email">Email</label>
+         <input asp-for="Email" />
+     </div>
 
 
-    <div>
-        <label asp-for="FirstName">First Name</label>
-        <input asp-for="FirstName" />
-    </div>
+     <div>
+         <label asp-for="FirstName">First Name</label>
+         <input asp-for="FirstName" />
+     </div>
 
-    <div>
-        <label asp-for="LastName">Last Name</label>
-        <input asp-for="LastName" />
-    </div>
+     <div>
+         <label asp-for="LastName">Last Name</label>
+         <input asp-for="LastName" />
+     </div>
 
-    <div>
-        <label asp-for="Password">Password</label>
-        <input asp-for="Password" />
-    </div>
-    <div>
-        <label asp-for="ConfirmPassword">Confirm Password</label>
-        <input asp-for="ConfirmPassword" />
-    </div>
+     <div>
+         <label asp-for="Password">Password</label>
+         <input asp-for="Password" />
+     </div>
+     <div>
+         <label asp-for="ConfirmPassword">Confirm Password</label>
+         <input asp-for="ConfirmPassword" />
+     </div>
 
-    <div>
-        <label asp-for="MusicType"> What kind of music do you like? </label>
-        <select asp-for="MusicType" asp-items="@Html.GetEnumSelectList(typeof(Genre))"></select>
-    </div>
 
-    <button type="submit"> Register</button>
-</form>
+     <div>
+         <label asp-for="MusicVenue"> What kind of music do you like? </label>
+         <select asp-for="MusicVenue" asp-items="@Html.GetEnumSelectList(typeof(MusicVenue))"></select>
+     </div>
+
+     <div>
+         <label asp-for="MusicType"> What kind of music do you like? </label>
+         <select asp-for="MusicType" asp-items="@Html.GetEnumSelectList(typeof(Genre))"></select>
+     </div>
+
+     <button type="submit"> Register</button>
+
+     
+ </form>
 
 <h1>@@test123T</h1>

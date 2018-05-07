@@ -39,7 +39,7 @@ namespace Emusic.Models.ViewModels
 
         [DataType(DataType.Password)]
         [Display(Name = "ConfirmPassword")]
-        [Compare("Password", ErrorMessage = "The Password and comfirmation do not match")]
+        [Compare("Password", ErrorMessage = "The Password  do not match")]
         public string ConfirmPassword { get; set; }
 
         [Required]

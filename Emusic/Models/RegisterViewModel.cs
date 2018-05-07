@@ -43,9 +43,14 @@ namespace Emusic.Models.ViewModels
         public string ConfirmPassword { get; set; }
 
         [Required]
-        [EnumDataType(typeof(MusicType))]
+        [EnumDataType(typeof(Genre))]
         [Display(Name = "MusicType")]
-        public string MusicType { get; set; }
+        public Genre MusicType { get; set; }
+
+        [Required]
+        [EnumDataType(typeof(MusicVenue))]
+        [Display(Name = "MusicVenue")]
+        public MusicVenue MusicVenue { get; set; }
 
 
     }

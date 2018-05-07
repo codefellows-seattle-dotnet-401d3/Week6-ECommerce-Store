@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Emusic.Models;
 using Emusic.Data;
 using Emusic.Models.Policies;
-
+using System.Security.Claims;
 
 namespace Emusic
 {
@@ -52,13 +52,38 @@ namespace Emusic
              
             });
 
-            services.AddSingleton<IAuthorizationHandler, MusicHandler>();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(ApplicationPolicies.AdminOnly, p => p.RequireRole(ApplicationRoles.Admin));
+                options.AddPolicy(ApplicationPolicies.MemberOnly, p => p.RequireRole(ApplicationRoles.Member, ApplicationRoles.Admin));
+                options.AddPolicy(ApplicationPolicies.CountryMusicOnly, p => p.RequireClaim(ClaimTypes.StateOrProvince, ((int)Genre.Country).ToString()));
+                options.AddPolicy(ApplicationPolicies.HeadPhonesOnly, p => p.RequireClaim("MusicVenue", ((int)MusicVenue.ILoveMyHeadPhones).ToString()));
+            });
+
 
 
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+            app.UseStaticFiles();
+
+            app.UseAuthentication();
+
+            app.UseMvc(routes => routes.MapRoute(
+                name: "Default",
+                template: "{controller=Home}/{action=Index}/{id?}"));
+        }
+
+        /*
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -79,6 +104,6 @@ namespace Emusic
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-        }
+        }*/
     }
 }

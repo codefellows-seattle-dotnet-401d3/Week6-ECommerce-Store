@@ -13,8 +13,25 @@ namespace Emusic.Data
         {
 
         }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Basket> Baskets { get; set; }
+        public DbSet<BasketItem> BasketItems { get; set; }
 
-        public DbSet<Product> Products {get; set;}
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Basket>()
+                .HasMany(b => b.Items)
+                .WithOne(bi => bi.Basket)
+                .HasForeignKey(bi => bi.BasketId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<BasketItem>()
+                .HasOne(bi => bi.Basket)
+                .WithMany(b => b.Items)
+                .HasForeignKey(bi => bi.BasketId)
+                .IsRequired(true);
+        }
+
 
     }
 }

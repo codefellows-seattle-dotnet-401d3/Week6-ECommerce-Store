@@ -10,179 +10,151 @@ using Microsoft.AspNetCore.Mvc;
 using Emusic.Data;
 using Emusic.Models;
 using Emusic.Models.ViewModels;
-using Microsoft.Extensions.Logging;
 
 namespace Emusic.Controllers
 {
-
+    [Authorize]
     public class AccountController : Controller
     {
 
-
-        /*hidden Files for accessing the user info */
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly ApplicationDbContext _dbContext;
 
-
-        /* application controller which brings in sign-in manager, and user
-        *
-         */
-        public AccountController(SignInManager<ApplicationUser>
-            signInManager, UserManager<ApplicationUser> userManager)
+        public AccountController(UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager, ApplicationDbContext dbContext)
         {
-            _signInManager = signInManager;
             _userManager = userManager;
+            _signInManager = signInManager;
+            _dbContext = dbContext;
         }
 
-        // Action which redirects to Register View Page
-        [HttpGet]
-        public IActionResult Register()
+        public List<Claim> GetDefaultClaimsListForUser(ApplicationUser user) => new List<Claim>
         {
-            return View();
-        }
-
-        //This looks at Models.RegisterViewModels
-        [HttpPost]
-        public async Task<IActionResult> Register(RegisterViewModel rvm)
-        {
-            /* this async method takes in items from RegisterViewModels & application users
-             */
-
-            //Checks to see If 
-            if (ModelState.IsValid)
-            {
-                //New object iteration enters this model. 
-                ApplicationUser user = new ApplicationUser()
-                {
-                    UserName = rvm.Email,
-                    Email = rvm.Email,
-                    FirstName = rvm.FirstName,
-                    LastName = rvm.LastName,
-                    MusicType = rvm.MusicType
-
-                };
-
-                //on Register view model sends to async results, keeps the password separte from the Application user.
-                //CreateAsync tells user-manager to make a query on the rvm.Password, makes sure that the code
-                //contiunes to run awaiting the call, makes the call to the external method
-                var result = await _userManager.CreateAsync(user, rvm.Password);
-
-                /*IF the user is successful is true Adding instanciate in to a <>list of claims
-                 * I  
-                 */
-
-                if (result.Succeeded)
-                {
-
-                    // Constructor for new Claims
-                    List<Claim> myClaims = new List<Claim>();
-
-                    // rvm async method to add the FirstNAme and last name
-                    Claim Nameclaim = new Claim(ClaimTypes.Name, $"{rvm.FirstName} {rvm.LastName}",
-
-                        ClaimValueTypes.String);
-
-                    //rvm async method to add email 
-                    Claim Emailclaim = new Claim(ClaimTypes.Email, rvm.Email, ClaimValueTypes.Email);
-
-                    //rvm async method to add DOB, create a new birth date time in a certain UTC; universal
-                    //sorted time Converts in a string format; date-time.
-                    Claim Birthdayclaim = new Claim(ClaimTypes.DateOfBirth, new DateTime
-                        (rvm.Birthday.Year, rvm.Birthday.Month, rvm.Birthday.Day).ToString("u"),
-                        ClaimValueTypes.DateTime);
-
-
-                    // Claim MusicFanClaim = new Claim(ClaimTypes.Equals, rvm.Music, ClaimValueTypes.String);
-
-
-
-                    // Claim MusicFanClaim = new Claim("MusicFanCheck", rvm.Music.ToString(), ClaimValueTypes.String);
-                    Claim MusicTypeClaim = new Claim("MusicType", rvm.MusicType.ToString(), ClaimValueTypes.String);
-
-
-                    // Add Method to add listed above name 
-                    myClaims.Add(Nameclaim);
-                    myClaims.Add(Emailclaim);
-                    myClaims.Add(Birthdayclaim);
-                    //myClaims.Add(MusicFanClaim);
-                    myClaims.Add(MusicTypeClaim);
-
-
-
-
-                    //another calls to the _usermanger and adding claims
-                    await _userManager.AddClaimsAsync(user, myClaims);
-
-                    /* Might need to use this later on
-                     */
-                    // If we decided to attach these claims to an identity. 
-                    //ClaimsIdentity ci = new ClaimsIdentity(myClaims);
-                    //Claims Identity -> drivers license, boarding passes
-                    //Claims Principle -> a collections on identity, main-man *needs better documentation*
-
-                    // Application roles. Member, (ApplicationRoles.Member)
-                    await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
-
-
-                    //True or False Roles.Member, sign in as a convince, or return URL
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-
-
-                    //
-                    return RedirectToAction("Index", "Home"); //REDIRECTS INDEX IN HOME
-                }
-
-            }
-
-            // returns register view model
-            return View();
-
-
-        }
-
-
-
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<IActionResult> Login(LoginViewModel lvm)
-        {
-            if (ModelState.IsValid)
-            {
-                var result = await _signInManager.PasswordSignInAsync(lvm.Email, lvm.Password, false, false);
-
-                if (result.Succeeded)
-                {
-                    var user = await _userManager.FindByEmailAsync(lvm.Email);
-                    // var role = await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin);
-
-                    if (await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin))
-                    {
-                        return RedirectToAction("Index", "Products");
-
-                    }
-
-                    return RedirectToAction("Index", "Shop");
-                }
-
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-
-            }
-            return View(lvm);
-
-        }
+            new Claim(ClaimTypes.Name, $"{user.LastName}, {user.FirstName}", ClaimValueTypes.String),
+            new Claim(ClaimTypes.Email, user.NormalizedEmail, ClaimValueTypes.Email),
+            new Claim("MusicType", ((int)user.MusicType).ToString(), ClaimValueTypes.Integer32),
+            new Claim("MusicVenue", ((int)user.MusicVenue).ToString(), ClaimValueTypes.Integer32)
+        };
 
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> Login()
         {
-            //clear all external logins to ensure a new and clean login
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
-
             return View(new LoginViewModel());
         }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(vm.Email,
+                    vm.Password, vm.KeepSignedIn, lockoutOnFailure: false);
+
+                if (result.Succeeded)
+                {
+                    ApplicationUser user = await _userManager.FindByEmailAsync(vm.Email);
+
+                    // If the user is an administrator, take them to the product administration
+                    // dashboard; otherwise, take the user to the products landing page
+                    if (await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin))
+                    {
+                        return RedirectToAction("Index", "Products");
+                    }
+
+                    return RedirectToAction("Index", "Shop");
+                }
+                if (result.RequiresTwoFactor)
+                {
+                    throw new NotImplementedException();
+                }
+                if (result.IsLockedOut)
+                {
+                    throw new NotImplementedException();
+                }
+            }
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+          
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        [ActionName("Register")]
+        public async Task<IActionResult> RegisterCommit(
+            [Bind("Email", "Password", "ConfirmPassword", "FirstName", "LastName", "MusicType", "MusicVenue")] RegisterViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                ApplicationUser user = new ApplicationUser()
+                {
+                    Email = vm.Email,
+                    NormalizedEmail = vm.Email.ToLower(),
+                    UserName = vm.Email,
+                    NormalizedUserName = vm.Email.ToLower(),
+                    ConcurrencyStamp = Guid.NewGuid().ToString(),
+
+                    FirstName = vm.FirstName,
+                    LastName = vm.LastName,
+                    MusicType = vm.MusicType,
+                    MusicVenue = vm.MusicVenue
+                };
+
+                IdentityResult result = await _userManager.CreateAsync(user, vm.Password);
+
+                if (result.Succeeded)
+                {
+                    // Add default claims and member role to the new user
+                    await _userManager.AddClaimsAsync(user, GetDefaultClaimsListForUser(user));
+                    await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
+
+                    // Sign the user in and redirect them back to whence they came
+                    await _signInManager.SignInAsync(user, isPersistent: true);
+
+                    // If the user is an administrator, take them to the product administration
+                    // dashboard; otherwise, take the user to the products landing page
+                    if (await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin))
+                    {
+                        return RedirectToAction("Index", "Products");
+                    }
+
+                    return RedirectToAction("Index", "Shop");
+                }
+
+                // Something went wrong. Accumulate all errors into the model state.
+                foreach (IdentityError error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
+
+            return View(vm);
+        }
+
+        public async Task<IActionResult> Profile()
+        {
+            return View(await _userManager.GetUserAsync(HttpContext.User));
+        }
     }
-
-
-
 }
 

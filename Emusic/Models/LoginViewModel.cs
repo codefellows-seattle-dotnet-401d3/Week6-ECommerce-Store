@@ -13,13 +13,12 @@ namespace Emusic.Models.ViewModels
             [EmailAddress]
             public string Email { get; set; }
 
-            [Required]
-            [DataType(DataType.Password)]
-            public string Password { get; set; }
-            public bool RememberMe { get; set; }
+             [Required]
+             [DataType(DataType.Password)]
+              public string Password { get; set; }
 
-            [Display(Name = "Keep Me Signed In")]
-            public bool KeepSignedIn;
-    }
+             [Display(Name = "Keep Me Signed In")]
+              public bool KeepSignedIn;
+        }       
     
 }

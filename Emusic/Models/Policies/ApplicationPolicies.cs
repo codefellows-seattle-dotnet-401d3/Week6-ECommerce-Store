@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Reflection;
+using System.Collections;
 
 namespace Emusic.Models.Policies
 {
@@ -11,6 +12,7 @@ namespace Emusic.Models.Policies
         public const string AdminOnly = "AdminOnly";
         public const string MemberOnly = "MemberOnly";
         public const string CountryMusicOnly = "CountryMusicOnly";
+        public const string HeadPhonesOnly = "HeadPhonesOnly";
 
 
         public static IEnumerable<string> ToEnumerable() =>

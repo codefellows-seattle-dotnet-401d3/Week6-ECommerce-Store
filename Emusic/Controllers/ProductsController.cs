@@ -7,11 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Emusic.Data;
 using Emusic.Models;
+using Emusic.Models.Policies;
 
 namespace Emusic.Controllers
 {
 
-
+    [Authorize(Policy = ApplicationPolicies.AdminOnly)]
     public class ProductsController : Controller
     {
         private readonly ProductDbContext _productDbContext;

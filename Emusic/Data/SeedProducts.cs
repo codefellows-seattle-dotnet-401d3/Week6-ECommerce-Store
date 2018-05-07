@@ -14,20 +14,35 @@ namespace Emusic.Data
         {
             new Product()
             {
-                Name = " ReD hot chili pepers Tickets",
-                Description= "A whole Day worth of tickets",
+                Name = " ReD hot chili Peppers Tickets",
+                Description= "the hottest upcoming events and concerts in LA ",
                 ImageHref="/images/Admit-One-Ticket.jpg",
                 Price = 1.00M,
             },
 
             new Product()
             {
-                Name = "Steve Young Ticekts ",
-                Description= "A whole Day worth of tickets",
+                Name = "Steve Young Tickets ",
+                Description= "the hottest upcoming events and concerts in LA ",
                 ImageHref="/images/Admit-One-Ticket.jpg",
                 Price = 1.00M,
-            }
+            },
 
+           new Product()
+            {
+                Name = "Bruno Mars Tickets ",
+                Description= "the hottest upcoming events and concerts in LA ",
+                ImageHref="/images/Admit-One-Ticket.jpg",
+                Price = 1.00M,
+            },
+
+           new Product()
+            {
+                Name = "VIP Premium ",
+                Description= "the Best seats and the hottest upcoming events and concerts Today ",
+                ImageHref="/images/Admit-One-Ticket.jpg",
+                Price = 2.00M,
+            },
         };
 
         public static async Task Initialize(IServiceProvider services)

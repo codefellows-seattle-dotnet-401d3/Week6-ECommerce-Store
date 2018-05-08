@@ -1,11 +1,12 @@
 ﻿@model ECommerce.Models.AccountViewModels.RegisterViewModel
+@using ECommerce.Models
 @{ 
     ViewData["Title"] = "Register";
 }
 <br />
 <h2>Registration</h2>
 
-<form method="post">
+<form method="post" asp-action="Register">
     <h3>Create an Account</h3>
 
     <div>
@@ -21,6 +22,12 @@
     <div>
         <label asp-for="LastName">Last Name</label>
         <input class="form-control" asp-for="LastName" />
+    </div>
+
+    <div>
+        <label asp-for="Location"></label>
+        <select class="form-control" asp-for="Location" asp-items="@Html.GetEnumSelectList(typeof(State))"></select>
+        <span asp-validation-for="Location"></span>
     </div>
 
     <div>

@@ -61,6 +61,12 @@ namespace ECommerce.Controllers
             return View(model);
         }
 
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+         
         [HttpGet]
         public IActionResult Register()
         {
@@ -77,7 +83,7 @@ namespace ECommerce.Controllers
                     UserName = model.Email,
                     Email = model.Email,
                     FirstName = model.FirstName,
-                    LastNAme = model.LastName,
+                    LastName = model.LastName,
                     Birthday = model.Birthday
                 };
 
@@ -86,7 +92,7 @@ namespace ECommerce.Controllers
                 if (result.Succeeded)
                 {
                     List<Claim> userClaims = new List<Claim>();
-
+                    //Claim claimLocation = new Claim(ClaimTypes.StateOrProvince, model.Location, ClaimValueTypes.String);
                     Claim claimName = new Claim(ClaimTypes.Name, $"{model.FirstName} {model.LastName}", ClaimValueTypes.String);
                     Claim claimEmail = new Claim(ClaimTypes.Email, model.Email, ClaimValueTypes.Email);
                     Claim claimBirth = new Claim(ClaimTypes.DateOfBirth, new DateTime
@@ -107,14 +113,6 @@ namespace ECommerce.Controllers
             }
 
             return View(model);
-        }
-
-
-        [HttpPost]
-        public async Task<IActionResult> Logout()
-        {
-            await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
         }
 
         private void AddErrors(IdentityResult result)

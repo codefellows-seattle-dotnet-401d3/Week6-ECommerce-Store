@@ -1,32 +1,43 @@
 ﻿@model ECommerce.Models.ProductCreateViewModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Create";
 }
 
-<h2>Registration</h2>
-
+<h2>Create New Product</h2>
+<br />
 <form method="post">
-    <h3>Create an Account</h3>
-
     <div>
         <label asp-for="Name">Product Name</label>
         <input class="form-control" asp-for="Name" />
     </div>
-
+    <br />
     <div>
         <label asp-for="Price">Price</label>
         <input class="form-control" asp-for="Price" />
     </div>
-
+    <br />
+    <div class="form-check disabled">
+        <label class="form-check-label" asp-for="StudentSale">
+            <input class="form-check-input" type="checkbox" value="" asp-for="StudentSale">
+            Student Sale Item
+        </label>
+    </div>
+    <br />
+    <div>
+        <label asp-for="SalePrice">Student Sale Price</label>
+        <input class="form-control" asp-for="SalePrice" />
+    </div>
+    <br />
     <div>
         <label asp-for="Description">Description</label>
         <input class="form-control" asp-for="Description" />
     </div>
-
+    <br />
     <div>
         <label asp-for="ImagePath">Image File Path</label>
         <input class="form-control" asp-for="ImagePath" />
     </div>
-
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <br />
+    <button type="submit" class="btn btn-success">Submit</button>
+    <button class="btn btn-danger" asp-controller="Product" asp-action="Index">Cancel</button>
 </form>

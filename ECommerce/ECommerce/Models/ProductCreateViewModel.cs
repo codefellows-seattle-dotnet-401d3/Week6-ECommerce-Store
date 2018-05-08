@@ -15,6 +15,11 @@ namespace ECommerce.Models
         [Required]
         public double Price { get; set; }
 
+        [Required]
+        public bool StudentSale { get; set; }
+
+        public double SalePrice { get; set; }
+
         [MinLength(10)]
         [Required]
         public string Description { get; set; }

@@ -94,6 +94,15 @@ namespace ECommerce.Controllers
             return View(product);
         }
 
+        [Authorize(Policy = "Student")]
+        public async Task<IActionResult> Student()
+        {
+            return View(new ProductViewModel()
+            {
+                Products = await _context.Product.ToListAsync()
+            });
+        }
+
         [Authorize(Policy ="AdminOnly")]
         [HttpPost]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,Description,ImagePath")] Product product)

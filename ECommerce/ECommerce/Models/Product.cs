@@ -12,5 +12,7 @@ namespace ECommerce.Models
         public double Price { get; set; }
         public string Description { get; set; }
         public string ImagePath { get; set; }
+        public bool StudentSale { get; set; }
+        public double SalePrice { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,8 +9,11 @@ namespace ECommerce.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
-        public string LastNAme { get; set; }
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+        public State Location { get; set; }
         public DateTime Birthday { get; set; }
     }
 
@@ -22,5 +26,59 @@ namespace ECommerce.Models
         public static string MemberNormalized => Member.ToUpper();
     }
 
-    public enum StarWars{ I, II, III, IV, V, VI, VII, IIX }
+    public enum State : Int32
+    {
+        AL,
+        AK,
+        AZ,
+        AR,
+        CA,
+        CO,
+        CT,
+        DC,
+        DE,
+        FL,
+        GA,
+        HI,
+        ID,
+        IL,
+        IN,
+        IA,
+        KS,
+        KY,
+        LA,
+        ME,
+        MD,
+        MA,
+        MI,
+        MN,
+        MS,
+        MO,
+        MT,
+        NE,
+        NV,
+        NH,
+        NJ,
+        NM,
+        NY,
+        NC,
+        ND,
+        OH,
+        OK,
+        OR,
+        PA,
+        RI,
+        SC,
+        SD,
+        TN,
+        TX,
+        UT,
+        VT,
+        VA,
+        WA,
+        WV,
+        WI,
+        WY,
+        OTHER,
+    }
 }

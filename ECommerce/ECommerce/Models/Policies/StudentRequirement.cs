@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace ECommerce.Models.Policies
 {
-    public class AdminRequirement : IAuthorizationRequirement
+    public class StudentRequirement : IAuthorizationRequirement
     {
-        public bool Admin { get; set; }
+        public string Student { get; set; }
 
-        public AdminRequirement(bool admin)
+        public StudentRequirement(string domain)
         {
-            Admin = admin;
+            Student = domain;
         }
     }
 }

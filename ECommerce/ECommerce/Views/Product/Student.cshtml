@@ -1,0 +1,24 @@
+﻿@model ECommerce.Models.ProductViewModel
+@{
+    ViewData["Title"] = "Student";
+}
+@{
+}
+
+@foreach (var product in Model.Products)
+{
+
+    <h3>@product.Name</h3>
+    if (product.StudentSale == true)
+    {
+        <h4>$@product.SalePrice</h4>
+
+    }
+    else
+    {
+        <h4>$@product.Price</h4>
+    }
+    <p>@product.Description</p>
+    <img class="product" src=@product.ImagePath />
+    <a asp-action="Details" asp-route-id="@product.Id">More Details</a>
+}

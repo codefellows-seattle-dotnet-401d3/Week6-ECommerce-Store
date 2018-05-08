@@ -1,10 +1,12 @@
 ﻿@model ECommerce.Models.AccountViewModels.LoginViewModel
+@using Microsoft.AspNetCore.Identity
+@using ECommerce.Models
 
 @{
     ViewData["Title"] = "Login";
 }
 
-<form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+<form method="post">
     <h4>Use a local account to log in.</h4>
     <hr />
     <div asp-validation-summary="All" class="text-danger"></div>

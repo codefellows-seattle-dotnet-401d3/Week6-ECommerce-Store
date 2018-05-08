@@ -1,4 +1,15 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@using ECommerce.Models
+
+@{
     ViewData["Title"] = "Index";
 }
-<h2>Hello from the other side</h2>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <h2>Welcome @User.Identity.Name</h2>
+}
+else
+{
+    <h2>Hello there Stranger!</h2>
+}

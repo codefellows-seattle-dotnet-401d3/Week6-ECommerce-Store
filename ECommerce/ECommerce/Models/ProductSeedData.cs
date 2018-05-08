@@ -26,7 +26,9 @@ namespace ECommerce.Models
                         Name = "R2D2 Bag",
                         Price = 49.99,
                         Description = "A wheeled bag that happens to look like R2D2",
-                        ImagePath = "/Images/bag.jpg"
+                        ImagePath = "/Images/bag.jpg",
+                        SalePrice = 39.99,
+                        StudentSale = true
                     },
 
                     new Product
@@ -34,7 +36,8 @@ namespace ECommerce.Models
                         Name = "Bathroom Tablet Stand",
                         Price = 29.99,
                         Description = "A stand that holds your tablet and toilet paper!!",
-                        ImagePath = "/Images/bathroom.jpg"
+                        ImagePath = "/Images/bathroom.jpg",
+                        StudentSale = false
                     },
 
                     new Product
@@ -42,7 +45,9 @@ namespace ECommerce.Models
                         Name = "All In One Breakfast Maker",
                         Price = 79.99,
                         Description = "One machine that handles all your breakfast needs",
-                        ImagePath = "/Images/breakfast.jpg"
+                        ImagePath = "/Images/breakfast.jpg",
+                        SalePrice = 60.99,
+                        StudentSale = true
                     },
 
                     new Product
@@ -50,7 +55,9 @@ namespace ECommerce.Models
                         Name = "Meatball Bubblegum",
                         Price = 4.99,
                         Description = "Gumballs that look like meatballs....",
-                        ImagePath = "/Images/bubblegum.jpg"
+                        ImagePath = "/Images/bubblegum.jpg",
+                        SalePrice = 2.50,
+                        StudentSale = true
                     },
 
                     new Product
@@ -58,7 +65,8 @@ namespace ECommerce.Models
                         Name = "Dog Duck Beak",
                         Price = 9.99,
                         Description = "A plastic beak to put on your dog",
-                        ImagePath = "/Images/dog-duck.jpg"
+                        ImagePath = "/Images/dog-duck.jpg",
+                        StudentSale = false
                     },
 
                     new Product
@@ -66,7 +74,8 @@ namespace ECommerce.Models
                         Name = "Canned Dragon Meat",
                         Price = 99.99,
                         Description = "The freshest canned dragon meat you will ever find",
-                        ImagePath = "/Images/dragon.jpg"
+                        ImagePath = "/Images/dragon.jpg",
+                        StudentSale = false
                     },
 
                     new Product
@@ -74,7 +83,8 @@ namespace ECommerce.Models
                         Name = "Foot Sweeps",
                         Price = 14.99,
                         Description = "Microfiber sweepers that go on your feet, sweep while you drag your feet around the house",
-                        ImagePath = "/Images/pet-sweep.jpg"
+                        ImagePath = "/Images/pet-sweep.jpg",
+                        StudentSale = false
                     },
 
                     new Product
@@ -82,7 +92,8 @@ namespace ECommerce.Models
                         Name = "Onesie Sweeper",
                         Price = 8.99,
                         Description = "A onesie with microfiber sweeper, so your child can clean for you!",
-                        ImagePath = "/Images/sweep.jpg"
+                        ImagePath = "/Images/sweep.jpg",
+                        StudentSale = false
                     }
                 );
                 context.SaveChanges();

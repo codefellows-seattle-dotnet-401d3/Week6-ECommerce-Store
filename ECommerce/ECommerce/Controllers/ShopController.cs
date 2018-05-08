@@ -1,6 +1,5 @@
 ﻿using ECommerce.Data;
 using ECommerce.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,12 +9,11 @@ using System.Threading.Tasks;
 
 namespace ECommerce.Controllers
 {
-    [Authorize(Policy = "AdminOnly")]
-    public class AdminController : Controller
+    public class ShopController : Controller
     {
-        private readonly ProductDbContext _context;
+        private ProductDbContext _context;
 
-        public AdminController(ProductDbContext context)
+        public ShopController(ProductDbContext context)
         {
             _context = context;
         }

@@ -51,7 +51,7 @@ namespace ECommerce.Controllers
                     {
                         return RedirectToAction("Index", "Admin");
                     }
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Shop");
                 }
 
                 ModelState.AddModelError(string.Empty, "Invalid login");
@@ -92,12 +92,16 @@ namespace ECommerce.Controllers
                 if (result.Succeeded)
                 {
                     List<Claim> userClaims = new List<Claim>();
-                    //Claim claimLocation = new Claim(ClaimTypes.StateOrProvince, model.Location, ClaimValueTypes.String);
                     Claim claimName = new Claim(ClaimTypes.Name, $"{model.FirstName} {model.LastName}", ClaimValueTypes.String);
                     Claim claimEmail = new Claim(ClaimTypes.Email, model.Email, ClaimValueTypes.Email);
                     Claim claimBirth = new Claim(ClaimTypes.DateOfBirth, new DateTime
                         (model.Birthday.Year, model.Birthday.Month, model.Birthday.Day).ToString("u"),
                         ClaimValueTypes.DateTime);
+                    if (model.Email.Contains(".edu"))
+                    {
+                        Claim claimStudent = new Claim(ClaimTypes.Email, model.Email, ClaimValueTypes.Email);
+                        userClaims.Add(claimStudent);
+                    }
                     
 
                     userClaims.Add(claimName);
@@ -114,6 +118,30 @@ namespace ECommerce.Controllers
 
             return View(model);
         }
+
+        public async Task<IActionResult> Profile()
+        {
+            return View(await _userManager.GetUserAsync(HttpContext.User));
+        }
+
+        //[HttpPost]
+        //public async Task<IActionResult> EditProfile([Bind("Id,FirstName,LastName,Location,Birthday")] ApplicationUser user)
+        //{
+        //    ApplicationUser updateUser = await _userManager.GetUserAsync(HttpContext.User);
+
+        //    if (ModelState.IsValid && updateUser != null)
+        //    {
+        //        try
+        //        {
+        //            updateUser.FirstName = user.FirstName;
+        //            updateUser.LastName = user.LastName;
+        //            updateUser.Location = user.Location;
+        //            updateUser.Birthday = user.Birthday;
+
+        //            await _userManager.UpdateAsync(updateUser);
+        //        }
+        //    }
+        //}
 
         private void AddErrors(IdentityResult result)
         {

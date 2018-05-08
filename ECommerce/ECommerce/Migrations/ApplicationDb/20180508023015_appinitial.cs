@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
-namespace ECommerce.Migrations
+namespace ECommerce.Migrations.ApplicationDb
 {
-    public partial class initialApplication : Migration
+    public partial class appinitial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -34,7 +34,8 @@ namespace ECommerce.Migrations
                     Email = table.Column<string>(maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(nullable: false),
                     FirstName = table.Column<string>(nullable: true),
-                    LastNAme = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    Location = table.Column<int>(nullable: false),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),

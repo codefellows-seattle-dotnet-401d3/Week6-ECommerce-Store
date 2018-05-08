@@ -8,13 +8,12 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 
-namespace ECommerce.Migrations.ProductDb
+namespace ECommerce.Migrations
 {
     [DbContext(typeof(ProductDbContext))]
-    [Migration("20180504062659_images")]
-    partial class images
+    partial class ProductDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,6 +32,10 @@ namespace ECommerce.Migrations.ProductDb
                     b.Property<string>("Name");
 
                     b.Property<double>("Price");
+
+                    b.Property<double>("SalePrice");
+
+                    b.Property<bool>("StudentSale");
 
                     b.HasKey("Id");
 

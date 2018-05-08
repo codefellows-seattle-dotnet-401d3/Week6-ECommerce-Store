@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
-namespace ECommerce.Migrations.ProductDb
+namespace ECommerce.Migrations
 {
-    public partial class ProductInitial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,7 +18,9 @@ namespace ECommerce.Migrations.ProductDb
                     Description = table.Column<string>(nullable: true),
                     ImagePath = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    Price = table.Column<double>(nullable: false)
+                    Price = table.Column<double>(nullable: false),
+                    SalePrice = table.Column<double>(nullable: false),
+                    StudentSale = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

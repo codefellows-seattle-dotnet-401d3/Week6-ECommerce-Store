@@ -47,7 +47,7 @@ namespace ECommerce
             {
                 options.AddPolicy("AdminOnly", policy => policy.RequireRole(ApplicationRoles.Admin));
                 options.AddPolicy("Over21", policy => policy.Requirements.Add(new MinimumAgeRequirement(21)));
-                options.AddPolicy("Student", policy => policy.Requirements.Add(new StudentRequirement(".edu")));
+                options.AddPolicy("Student", policy => policy.RequireClaim("claimStudent"));
             });
 
             services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();

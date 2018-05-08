@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 
-namespace ECommerce.Migrations.ProductDb
+namespace ECommerce.Migrations
 {
     [DbContext(typeof(ProductDbContext))]
-    [Migration("20180508022448_addsale")]
-    partial class addsale
+    [Migration("20180508022922_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

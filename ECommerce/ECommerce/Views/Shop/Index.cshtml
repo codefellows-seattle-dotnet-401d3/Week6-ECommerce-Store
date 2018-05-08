@@ -3,8 +3,8 @@
     ViewData["Title"] = "Index";
 }
 
-<p>These are the current products in the inventory.</p>
-
+<h2>Please look at our selection.</h2>
+<br />
 @foreach (var product in Model.Products)
 {
 
@@ -12,4 +12,6 @@
     <h4>@product.Price</h4>
     <p>@product.Description</p>
     <img class="productImage" src=@product.ImagePath />
+    <br />
+    <button type="button" class="btn btn-warning">Add To Cart</button>
 }

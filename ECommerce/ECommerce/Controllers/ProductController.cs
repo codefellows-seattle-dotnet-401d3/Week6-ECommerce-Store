@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ECommerce.Controllers
 {
+    [Authorize(Policy = "AdminOnly")]
     public class ProductController : Controller
     {
         private readonly ProductDbContext _context;
@@ -27,7 +28,6 @@ namespace ECommerce.Controllers
             });
         }
 
-        [Authorize(Policy = "AdminOnly")]
         [HttpGet]
         public async Task<IActionResult> Create(
             [Bind("Name", "Price", "Description", "ImagePath")] ProductCreateViewModel vm)
@@ -76,7 +76,6 @@ namespace ECommerce.Controllers
             return View(product);
         }
 
-        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -94,16 +93,14 @@ namespace ECommerce.Controllers
             return View(product);
         }
 
-        [Authorize(Policy = "Student")]
-        public async Task<IActionResult> Student()
-        {
-            return View(new ProductViewModel()
-            {
-                Products = await _context.Product.ToListAsync()
-            });
-        }
+        //public async Task<IActionResult> Student()
+        //{
+        //    return View(new ProductViewModel()
+        //    {
+        //        Products = await _context.Product.ToListAsync()
+        //    });
+        //}
 
-        [Authorize(Policy ="AdminOnly")]
         [HttpPost]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,Description,ImagePath")] Product product)
         {
@@ -142,7 +139,6 @@ namespace ECommerce.Controllers
             return _context.Product.Any(p => p.Id == id);
         }
 
-        [Authorize(Policy ="AdminOnly")]
         public async Task<IActionResult> Delete(int? id)
         {
             if(id == null)

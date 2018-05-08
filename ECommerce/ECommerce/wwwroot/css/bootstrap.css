@@ -51,6 +51,11 @@
     box-sizing: border-box;
 }
 
+.productImage {
+    width: 250px;
+    height: auto;
+}
+
 html {
     font-family: sans-serif;
     line-height: 1.15;

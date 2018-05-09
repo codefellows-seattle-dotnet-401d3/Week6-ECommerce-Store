@@ -1,0 +1,40 @@
+﻿@model ECommerce.Models.ProductViewModel
+@{
+    ViewData["Title"] = "Student";
+}
+@{
+}
+<h2>Student Specials</h2>
+<p>Check our inventory for Student Special pricing on select items</p>
+<br />
+
+@foreach (var product in Model.Products)
+{
+    <div class="card mb-3" style="width: 400px;">
+        <h3 class="card-header">@product.Name</h3>
+        <img style="height: 200px; width: 50%; display: block;" src=@product.ImagePath alt="Card image">
+        <div class="card-body">
+            <p class="card-text">@product.Description</p>
+        </div>
+        
+
+        @if(product.StudentSale == true)
+        {
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item" style="color: red;">Original Price: $@product.Price</li>
+        </ul>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item" style="color: green;">Student Price: $@product.SalePrice</li>
+        </ul>
+        }
+        else
+        {
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Price: $@product.Price</li>
+            </ul>
+        }
+        
+        <br />
+        <a style="width: 33%;" class="btn btn-info" asp-controller="Shop" asp-route-id="@product.Id" asp-action="Details">Details</a>
+    </div>
+}

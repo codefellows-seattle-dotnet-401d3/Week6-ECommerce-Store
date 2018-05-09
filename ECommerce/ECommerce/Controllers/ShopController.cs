@@ -1,5 +1,6 @@
 ﻿using ECommerce.Data;
 using ECommerce.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -41,6 +42,15 @@ namespace ECommerce.Controllers
             }
 
             return View(product);
+        }
+
+        [Authorize(Policy = "Student")]
+        public async Task<IActionResult> Student()
+        {
+            return View(new ProductViewModel()
+            {
+                Products = await _context.Product.ToListAsync()
+            });
         }
     }
 }

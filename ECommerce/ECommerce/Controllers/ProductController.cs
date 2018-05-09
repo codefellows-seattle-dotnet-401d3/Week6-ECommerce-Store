@@ -93,14 +93,6 @@ namespace ECommerce.Controllers
             return View(product);
         }
 
-        //public async Task<IActionResult> Student()
-        //{
-        //    return View(new ProductViewModel()
-        //    {
-        //        Products = await _context.Product.ToListAsync()
-        //    });
-        //}
-
         [HttpPost]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,Description,ImagePath")] Product product)
         {

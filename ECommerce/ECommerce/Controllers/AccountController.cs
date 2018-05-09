@@ -19,6 +19,8 @@ namespace ECommerce.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
+        public string Rights { get; private set; }
+
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager)
@@ -87,6 +89,14 @@ namespace ECommerce.Controllers
                     Birthday = model.Birthday
                 };
 
+                if (user.Email.Contains(".edu"))
+                {
+                    user.Student = true;
+                } else
+                {
+                    user.Student = false;
+                }
+
                 var result = await _userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
@@ -97,9 +107,9 @@ namespace ECommerce.Controllers
                     Claim claimBirth = new Claim(ClaimTypes.DateOfBirth, new DateTime
                         (model.Birthday.Year, model.Birthday.Month, model.Birthday.Day).ToString("u"),
                         ClaimValueTypes.DateTime);
-                    if (model.Email.Contains(".edu"))
+                    if (user.Student)
                     {
-                        Claim claimStudent = new Claim(ClaimTypes.Email, model.Email, ClaimValueTypes.Email);
+                        Claim claimStudent = new Claim("studentClaim", "Student", ClaimValueTypes.Boolean);
                         userClaims.Add(claimStudent);
                     }
                     

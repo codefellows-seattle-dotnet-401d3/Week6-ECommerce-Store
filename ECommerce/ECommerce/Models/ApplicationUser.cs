@@ -14,6 +14,7 @@ namespace ECommerce.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
         public State Location { get; set; }
+        public bool Student { get; set; }
         public DateTime Birthday { get; set; }
     }
 

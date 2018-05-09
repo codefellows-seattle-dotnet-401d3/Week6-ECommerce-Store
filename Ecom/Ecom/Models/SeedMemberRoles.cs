@@ -14,18 +14,16 @@ namespace Ecom.Models
         private const string AdminPassword = "@T3st!";
 
         private static readonly List<IdentityRole> Roles = new List<IdentityRole>()
-      {
+        {
           new IdentityRole{Name=ApplicationRoles.Admin,
               NormalizedName = ApplicationRoles.Admin.ToUpper(),
               ConcurrencyStamp = Guid.NewGuid().ToString()
-
           },
           new IdentityRole{Name=ApplicationRoles.Member,
           NormalizedName = ApplicationRoles.Member.ToUpper(),
           ConcurrencyStamp = Guid.NewGuid().ToString()
-
-      }
-      };
+          }
+        };
 
 
         public static void SeedData(IServiceProvider serviceProvider, UserManager<ApplicationUser> userManager)

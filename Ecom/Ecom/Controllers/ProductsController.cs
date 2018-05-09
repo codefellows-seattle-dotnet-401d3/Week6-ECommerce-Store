@@ -20,13 +20,11 @@ namespace Ecom.Controllers
             _context = context;
         }
 
-        // GET: Products
         public async Task<IActionResult> Index()
         {
             return View(await _context.Products.ToListAsync());
         }
 
-        // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -52,7 +50,6 @@ namespace Ecom.Controllers
 
         [Authorize(Policy = "AdminOnly")]
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Description,Cost,Url")] Product product)
         {
             if (ModelState.IsValid)
@@ -82,7 +79,6 @@ namespace Ecom.Controllers
 
         [Authorize(Policy = "AdminOnly")]
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Cost,Url")] Product product)
         {
             if (id != product.Id)
@@ -131,9 +127,7 @@ namespace Ecom.Controllers
             return View(product);
         }
 
-        // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var product = await _context.Products.SingleOrDefaultAsync(m => m.Id == id);

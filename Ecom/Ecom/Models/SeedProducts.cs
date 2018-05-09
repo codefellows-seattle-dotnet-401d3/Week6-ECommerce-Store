@@ -18,10 +18,10 @@ namespace Ecom.Models
                 if (context.Products.Any()) return; // No seed needed
 
                 context.Products.AddRange(
-                    new Product { Name = "Fighter Gear", Description = "All you need", Cost = 10.99m, Url = "Test URL"},
-                    new Product { Name = "Rogue Gear", Description = "All you need", Cost = 10.99m, Url = "Test URL" },
-                    new Product { Name = "Ranger Gear", Description = "All you need", Cost = 10.99m, Url = "Test URL" },
-                    new Product { Name = "Wizard Gear", Description = "All you need", Cost = 10.99m, Url = "Test URL" }
+                    new Product { Name = "Fighter Gear", Description = "All you need", Cost = 10.99m, Url = "http://placehold.it/300x300" },
+                    new Product { Name = "Rogue Gear", Description = "All you need", Cost = 10.99m, Url = "http://placehold.it/300x300" },
+                    new Product { Name = "Ranger Gear", Description = "All you need", Cost = 10.99m, Url = "http://placehold.it/300x300" },
+                    new Product { Name = "Wizard Gear", Description = "All you need", Cost = 10.99m, Url = "http://placehold.it/300x300" }
                     );
                 context.SaveChanges();
             }

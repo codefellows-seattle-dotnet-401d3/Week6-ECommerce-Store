@@ -25,5 +25,22 @@ namespace ECommerce.Controllers
                 Products = await _context.Product.ToListAsync()
             });
         }
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (!id.HasValue)
+            {
+                return RedirectToAction("Index");
+            }
+
+            Product product = await _context.Product.FirstOrDefaultAsync(p => p.Id == id);
+
+            if (product is null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View(product);
+        }
     }
 }

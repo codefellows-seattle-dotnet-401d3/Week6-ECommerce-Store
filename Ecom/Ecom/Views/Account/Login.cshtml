@@ -1,4 +1,7 @@
 ﻿@using Ecom.Models
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+
 @model Ecom.Models.LoginViewModel
 @{
 
@@ -29,3 +32,20 @@
         <button type="submit">Log in</button>
     </div>
 </form>
+<div class="col-xl-4">
+    <div class="card">
+        <p class="card-header">External Login Providers</p>
+        <div class="card-body">
+            @{
+                var loginProviders = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+                <form asp-action="ExternalLogin" method="post">
+                    @foreach (var provider in loginProviders)
+                    {
+                        <button type="submit" name="provider" value="@provider.Name" class="btn btn-primary">@provider.Name</button>
+                    }
+                </form>
+            }
+        </div>
+    </div>
+</div>

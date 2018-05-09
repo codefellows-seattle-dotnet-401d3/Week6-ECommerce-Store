@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Ecom.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Ecom.Controllers
 {
@@ -105,6 +106,58 @@ namespace Ecom.Controllers
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
             }
             return View(lvm);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public IActionResult ExternalLogin(string provider)
+        {
+            string redirectUrl = Url.Action(nameof(ExternalLoginCallbackAsync), "Account");
+            AuthenticationProperties properties = _signInManager.ConfigureExternalAuthenticationProperties(
+                provider, redirectUrl);
+
+            return Challenge(properties, provider);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> ExternalLoginCallbackAsync(string remoteError = null)
+        {
+            if (remoteError != null)
+            {
+                return RedirectToAction(nameof(Login));
+            }
+
+            var info = await _signInManager.GetExternalLoginInfoAsync();
+
+            if (info is null)
+            {
+                return RedirectToAction(nameof(Login));
+            }
+
+            var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey,
+                isPersistent: false, bypassTwoFactor: true);
+
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index", "Shop");
+            }
+
+            string externalPrincipalEmail = info.Principal.FindFirstValue(ClaimTypes.Email);
+            ApplicationUser user = await _userManager.FindByEmailAsync(externalPrincipalEmail);
+
+            if (user is null)
+            {
+                return RedirectToAction("ExternalRegister", new { provider = info.LoginProvider, email = externalPrincipalEmail });
+            }
+
+            if ((await _userManager.AddLoginAsync(user, info)).Succeeded)
+            {
+                await _signInManager.SignInAsync(user, isPersistent: false);
+                return RedirectToAction("Index", "Shop");
+            }
+
+            return RedirectToAction(nameof(Login));
         }
     }
 }

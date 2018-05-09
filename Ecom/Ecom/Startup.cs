@@ -52,6 +52,12 @@ namespace Ecom
                 options.AddPolicy("JoinedGuild", policy => policy.RequireClaim("guildCheck"));
                 options.AddPolicy("IsClassFighter", policy => policy.Requirements.Add(new ClassRequirment("Fighter")));
             });
+
+            services.AddAuthentication().AddGoogle(googleOptions =>
+            {
+                googleOptions.ClientId = Configuration["Authentication:Google:web:client_id"];
+                googleOptions.ClientSecret = Configuration["Authentication:Google:web:client_secret"];
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

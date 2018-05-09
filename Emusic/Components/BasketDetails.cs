@@ -23,13 +23,21 @@ namespace Emusic.Components
             _userManager = userManager;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync(bool quanityInputs = true, bool checkoutButton = true)
+        
         {
             /* This action allows the view model is set to basket View Model in order to be 
              * called at a
              */
             
-            BaskeDetailsViewModel bvm = new BaskeDetailsViewModel();
+            BaskeDetailsViewModel bvm = new BaskeDetailsViewModel()
+            {
+                QuantityInputs = quanityInputs,
+                CheckoutButton = checkoutButton,
+            };
+
+
+
 
             long? currentBasketId =
                 (await _userManager.GetUserAsync(HttpContext.User))?.CurrentBasketId;
@@ -49,10 +57,18 @@ namespace Emusic.Components
                                                            .Include(bi => bi.Product)
                                                            .ToListAsync();
 
+
+                if (bvm.QuantityInputs)
+                {
+                    bvm.Quantities = new Dictionary<long, int>();
+                    foreach (BasketItem item in bvm.Items)
+                    {
+                        bvm.Quantities[item.Id] = item.Quantity;
+                    }
+                }
+
                 /* Basket View model total Line Items
                  */
-
-
                 bvm.TotalQuantity = bvm.Items.Select(bi => bi.Quantity)
                                              .Sum();
 
@@ -67,6 +83,8 @@ namespace Emusic.Components
 
             return View(bvm);
         }
+
+        //Add basket items here.
 
 
 

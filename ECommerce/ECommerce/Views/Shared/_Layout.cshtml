@@ -20,9 +20,6 @@
 
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto">
-                @*<li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>*@
                 <li class="nav-item">
                     <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
                 </li>
@@ -30,6 +27,9 @@
                 {
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="Account" asp-action="Logout">Logout</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Account" asp-action="Profile">Profile</a>
                     </li>
                 } else
                 {
@@ -43,14 +43,19 @@
                     </li>
 
                 }
-                <li class="nav-item">
-                    <a class="nav-link" asp-controller="Shop" asp-action="Index">Shopping</a>
-                </li>
+                @if (User.HasClaim("studentClaim", "Student"))
+                {
+                    <li class="nav-item">
+                    <a class="nav-link" asp-controller="Shop" asp-action="Student">Student Specials</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Shop" asp-action="Index">Shopping</a>
+                    </li>
+                }
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                <button class="btn btn-info" type="submit">Search</button>
-            </form>
         </div>
     </nav>
     <div class="container body-content">

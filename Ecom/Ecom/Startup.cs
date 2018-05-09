@@ -55,8 +55,8 @@ namespace Ecom
 
             services.AddAuthentication().AddGoogle(googleOptions =>
             {
-                googleOptions.ClientId = Configuration["Authentication:Google:web:client_id"];
-                googleOptions.ClientSecret = Configuration["Authentication:Google:web:client_secret"];
+                googleOptions.ClientId = Configuration["client_id"];
+                googleOptions.ClientSecret = Configuration["client_secret"];
             });
         }
 

@@ -45,8 +45,11 @@ an online album. Another claim is if the user only likes country music they are 
 5. The website will run on your default web browser routing to the main home page.
 
 ## Example
-
+The Front of the Store
 ![alt text](Estore.JPG)
+
+Admin Page
+![alt text](Seller Page.JPG)
 
 <!-- Show them what looks like and how how to use the application.  -->
 

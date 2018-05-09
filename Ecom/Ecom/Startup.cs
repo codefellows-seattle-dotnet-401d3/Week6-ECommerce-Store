@@ -38,12 +38,12 @@ namespace Ecom
 
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                options.UseSqlServer(Configuration.GetConnectionString("AzureConnection"));
             });
 
             services.AddDbContext<ProductDbContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                options.UseSqlServer(Configuration.GetConnectionString("AzureConnection"));
             });
 
             services.AddAuthorization(options =>

@@ -15,23 +15,26 @@ Tiger Hsu
 ## Overview
 This is a music ticket store; we sell music tickets.
 
-#Product:
+# Product:
 Music tickets for around a dollar. There are several types ranging from $1 to $2 dollars.
 
-#Polices:
+# Polices:
+Polices allows members to access certain areas of the website; In my instance if you are a Administator you 
+are allowed to view, edit, and delete different types of tickets.
 
-#Claims: 
-So 
+# Claims: 
+Claims work similar to Polices; only certain users are allowed to access a certain part of the website.
+In my attempt; If a user selects ILoveListeningON Headphones; then only the user is allowed to purchase 
+an online album. Another claim is if the user only likes country music they are only allowed to listen to Garth Brooks.
 
-#Policies:
 
-#OAUTH
+# OAUTH
 -INCOMPLETE
 
-#Eamil:
+# Eamil:
 -INCOMPLETE
 
-#Code Coverage:
+# Code Coverage:
 -INCOMPLETE
 
 
@@ -54,6 +57,7 @@ So
 
 
 ## Attribution
+Josh Taylor
 
 
 ## Resources

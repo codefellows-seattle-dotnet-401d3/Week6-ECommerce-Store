@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace Emusic.Models
 {
     public class ApplicationUser : IdentityUser
@@ -13,13 +12,19 @@ namespace Emusic.Models
 
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
+
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
        
-        [Display(Name = "Rock Roll TYpe")]
-        public string MusicType { get; set; }
+        [Display(Name = "Music Type")]
+        public Genre MusicType { get; set; }
 
+        [Display(Name = "Music Venue")]
+        public MusicVenue MusicVenue { get; set; }
+
+
+        //Current Basket Id is used for display
         public long? CurrentBasketId { get; set; }
     }
 
@@ -32,10 +37,27 @@ namespace Emusic.Models
         public static string MemberNormalized => Member.ToUpper();
     }
 
-    public enum MusicType : Int32
+    public enum Genre : Int32
     {
-        Rock,
-        Roll,
+        Pop,
+        Dance,
+        Country,
+        [Display(Name = "Rock and Roll")] RockandRoll,
+        [Display(Name = " R & B")] Rythmandblues,
+        Electronic,
+        Jazz,
+        HeavyMetal,
+    }
+
+
+    public enum MusicVenue : Int32
+    {
+        Amphitheater,
+        Stadium,
+        NightClub,
+        ILoveMyHeadPhones,
+
+
     }
 
 }

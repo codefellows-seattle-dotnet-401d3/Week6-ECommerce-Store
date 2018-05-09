@@ -17,14 +17,14 @@ namespace Emusic.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "WEB DEVS INC.";
 
             return View();
         }
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = " Email us at Email@Emai.com";
 
             return View();
         }

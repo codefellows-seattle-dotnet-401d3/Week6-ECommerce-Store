@@ -1,0 +1,32 @@
+﻿@model Product
+
+@{
+    ViewBag.Title = "Product Details";
+}
+
+
+
+<div class="row">
+    <div class="col-xl-8">
+        <div class="col-xl-10 offset-xl-1">
+            <div class="card">
+                <p class="card-header h2">@Html.DisplayFor(p => p.Name)</p>
+                <div class="card-body pb-0">
+                    <div class="row">
+                        <div class="col-xl-8">
+                            @Html.DisplayFor(p => p.Description)
+                            <img src="@Model.ImageHref" class="card-img-bottom mt-4 col-xl-8 mx-auto d-block" />
+                        </div>
+                        <div class="col-xl-4 text-right">
+                            <p class="h2 text-primary text-center">@Html.DisplayFor(p => p.Price) Each</p>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4">
+      
+    </div>
+</div>

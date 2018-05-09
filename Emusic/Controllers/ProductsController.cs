@@ -7,11 +7,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Emusic.Data;
 using Emusic.Models;
+using Emusic.Models.Policies;
 
 namespace Emusic.Controllers
 {
+    /// <summary>
+    /// Controller For Products if Authorized User
+    /// </summary>
 
-
+    [Authorize(Policy = ApplicationPolicies.AdminOnly)]
     public class ProductsController : Controller
     {
         private readonly ProductDbContext _productDbContext;
@@ -31,6 +35,10 @@ namespace Emusic.Controllers
             return View();
         }
 
+            /// <summary>
+            /// Binding New 
+            /// </summary>
+  
         [HttpPost, ActionName("Create")]
         public async Task<IActionResult> CommitCreate(
             [Bind("Name", "Description", "Price", "ImageHref")] Product newProduct)
@@ -42,15 +50,18 @@ namespace Emusic.Controllers
 
                 try
                 {
+                    //saving changes to the product using Async callback
                     await _productDbContext.SaveChangesAsync();
 
                 
                     return RedirectToAction(nameof(Index));
                 }
+
+                //This occurs if Database is failed
                 catch (DbUpdateException)
                 {
                    
-                    ModelState.AddModelError("", "Unable to commit changes to database. Please try again.");
+                    ModelState.AddModelError("", "Nope");
 
                   
                 }
@@ -59,31 +70,43 @@ namespace Emusic.Controllers
             return View(newProduct);
         }
 
+            /// <summary>
+            /// Product.Model is valid 
+            /// </summary>
+
         public async Task<IActionResult> Edit(long? id)
         {
+            //Models.Product
             Product product;
 
-          
+            //bool is true; allow product to find using Async  
             if (!id.HasValue ||
                 (product = await _productDbContext.Products.FindAsync(id.Value)) is null)
             {
+                // Then redirect to Product{i}
                 return RedirectToAction(nameof(Index));
             }
 
             return View(product);
         }
 
+            /// <summary>
+            /// Post Method for Edit products
+            /// </summary>
+
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CommitEdit(long? id)
-        {
+        {   //If no Id is found You cant do anything
             if (!id.HasValue)
             {
                 return NotFound();
             }
 
+            //If a product.Model var exsist then consider async find by id
             Product existingProduct = await _productDbContext.Products.FindAsync(id.Value);
 
+            //
             if (await TryUpdateModelAsync(existingProduct, "",
                 p => p.Name, p => p.Description, p => p.Price, p => p.ImageHref))
             {
@@ -94,12 +117,16 @@ namespace Emusic.Controllers
                 }
                 catch (DbUpdateException)
                 {
-                    ModelState.AddModelError("", "Unable to commit changes to database. Please try again.");
+                    ModelState.AddModelError("", "Nope");
                 }
             }
 
             return View(existingProduct);
         }
+
+            /// <summary>
+            /// async Delete method
+            /// </summary>
 
         public async Task<IActionResult> Delete(long? id)
         {
@@ -114,6 +141,10 @@ namespace Emusic.Controllers
 
             return View(product);
         }
+
+            /// <summary>
+            /// confirm delete
+            /// </summary>
 
         [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> CommitDelete(long? id)
@@ -142,7 +173,11 @@ namespace Emusic.Controllers
             
             return RedirectToAction(nameof(Index));
         }
-
+            
+            /// <summary>
+            /// Async Details page 
+            /// </summary>
+  
         public async Task<IActionResult> Details(long? id)
         {
             Product product;

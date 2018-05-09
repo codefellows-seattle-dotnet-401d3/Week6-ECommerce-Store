@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Emusic.Models;
 using Emusic.Data;
 using Emusic.Models.Policies;
-
+using System.Security.Claims;
 
 namespace Emusic
 {
@@ -36,29 +36,51 @@ namespace Emusic
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+
+
             services.AddDbContext<ProductDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
 
             services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
+    
+            // Policy remember to look at models.Policy at startup
+
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("AdminOnly", policy => policy.RequireRole(ApplicationRoles.Admin));
-                options.AddPolicy("AdminOnly", policy => policy.RequireRole(ApplicationRoles.Admin));
-
-             
+                options.AddPolicy(ApplicationPolicies.AdminOnly, p => p.RequireRole(ApplicationRoles.Admin));
+                options.AddPolicy(ApplicationPolicies.MemberOnly, p => p.RequireRole(ApplicationRoles.Member, ApplicationRoles.Admin));
+                options.AddPolicy(ApplicationPolicies.CountryMusicOnly, p => p.RequireClaim(ClaimTypes.StateOrProvince, ((int)Genre.Country).ToString()));
+                options.AddPolicy(ApplicationPolicies.HeadPhonesOnly, p => p.RequireClaim("MusicVenue", ((int)MusicVenue.ILoveMyHeadPhones).ToString()));
             });
 
-            services.AddSingleton<IAuthorizationHandler, MusicHandler>();
-
+            // add require HTTPs Insert Here.
 
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+            app.UseStaticFiles();
+
+            app.UseAuthentication();
+
+            app.UseMvc(routes => routes.MapRoute(
+                name: "Default",
+                template: "{controller=Home}/{action=Index}/{id?}"));
+        }
+
+        /*
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -79,6 +101,6 @@ namespace Emusic
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-        }
+        }*/
     }
 }

@@ -46,7 +46,7 @@ an online album. Another claim is if the user only likes country music they are 
 
 ## Example
 
-![alt text](http://url/to/img.png)
+![alt text](Estore.JPG)
 
 <!-- Show them what looks like and how how to use the application.  -->
 

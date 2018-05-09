@@ -1,0 +1,2 @@
+add-migration newPRoduct -Context ProductDbContext
+update-database -Context ProductDbContext

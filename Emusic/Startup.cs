@@ -36,8 +36,11 @@ namespace Emusic
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+
+
             services.AddDbContext<ProductDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
 
             services.AddDbContext<ApplicationDbContext>(options =>
             {
@@ -45,6 +48,8 @@ namespace Emusic
             });
 
     
+            // Policy remember to look at models.Policy at startup
+
             services.AddAuthorization(options =>
             {
                 options.AddPolicy(ApplicationPolicies.AdminOnly, p => p.RequireRole(ApplicationRoles.Admin));
@@ -53,7 +58,7 @@ namespace Emusic
                 options.AddPolicy(ApplicationPolicies.HeadPhonesOnly, p => p.RequireClaim("MusicVenue", ((int)MusicVenue.ILoveMyHeadPhones).ToString()));
             });
 
-
+            // add require HTTPs Insert Here.
 
 
         }

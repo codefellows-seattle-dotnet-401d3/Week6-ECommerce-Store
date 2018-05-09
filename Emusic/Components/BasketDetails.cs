@@ -25,32 +25,42 @@ namespace Emusic.Components
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            // Always create a view model to avoid the view component view trying
-            // to take the current action's model (possible MVC bug?)
+            /* This action allows the view model is set to basket View Model in order to be 
+             * called at a
+             */
+            
             BaskeDetailsViewModel bvm = new BaskeDetailsViewModel();
 
             long? currentBasketId =
                 (await _userManager.GetUserAsync(HttpContext.User))?.CurrentBasketId;
 
-            // If the user is logged in and has a basket, fill in the view model;
-            // otherwise, the default values will suffice
+            /* Boolean is the basket filled with items?
+             */
+
             if (currentBasketId.HasValue)
             {
-                // Retrieve all of the items in the current basket, making sure
-                // to include the Product navigational property
+                /* LINQ expression select all product DB context where the basket.ID matches
+                 * Product inventory
+                 */
+   
                 bvm.Items = await _productDbContext.Baskets.Where(b => b.Id == currentBasketId)
                                                            .Include(b => b.Items)
                                                            .SelectMany(b => b.Items)
                                                            .Include(bi => bi.Product)
                                                            .ToListAsync();
 
-                // Find the total quantity in the basket by summing each line item's quantity
+                /* Basket View model total Line Items
+                 */
+
+
                 bvm.TotalQuantity = bvm.Items.Select(bi => bi.Quantity)
                                              .Sum();
 
-                // Find the grand total price in the basket by summing the products of each
-                // line item's quantity by its product's price. The Product navigational
-                // property was already included in the Items LINQ expression seen above.
+                /* LINQ expression Product DB context total inventory by select items()
+                 * Product.Quantity times Product.Price = total value of basket.
+                 */
+
+ 
                 bvm.TotalPrice = bvm.Items.Select(bi => bi.Quantity * bi.Product.Price)
                                           .Sum();
             }

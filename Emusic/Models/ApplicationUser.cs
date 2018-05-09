@@ -24,7 +24,7 @@ namespace Emusic.Models
         public MusicVenue MusicVenue { get; set; }
 
 
-
+        //Current Basket Id is used for display
         public long? CurrentBasketId { get; set; }
     }
 

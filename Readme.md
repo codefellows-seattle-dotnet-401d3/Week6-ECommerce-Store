@@ -1,28 +1,23 @@
-# Week 6 Lab: Build an E-Commerce Store
+# Buss Mall Galore!!!
+
+## The Site
+http://bussmallgalore.azurewebsites.net/
 
 ## Overview
-This is a multi-day assignment. Take the topics from each day of lecture, and apply them to your 
-personal e-commerce store. Be sure to read the directions in it's entirety before beginning.
+This is the Buss Mall Galore Web Store!! We sell all the greatest items
+from the Buss Mall Survey app. So we are selling a lot of novelty items
+that may or may not be useful or even real.
 
-<br />
-Pay close attention to the naming conventions specified. 
+## Claims
+Student Claim - If the user is a student, they get access to special sales
+Email Claim - Still needs implemented, will be used to send special offers
 
-### Day 1 - Intro to Identity
+## Policies
+AdminOnly Policy - To protect the creation, edit and deletion of products
+in the product controller.
+Student Policy - Gives a user with the Student claim access to the Student Shopping
+section of the site.
 
-- Create a brand new empty web application in Visual Studio. 
-- Enable/Include the Identity Framework and all of it's required components. 
-	- Enable Identity in the `ConfigureServices`, and add authentication to your `Configure` method
-	- Create an `ApplicationUser` that derives from `IdentityUser`
-	- Create an `ApplicationDbContext` that derives from IdentiyDbContext
-	- Register the `ApplicationDbContext` in the `Startup.cs` File. 
-
-- Create both a *Login* and *Register* page for your site. These actions should live in an *AccountController*.
-	- Bring in `UserManager<ApplicationUser>` and `SignInManager<ApplicationUser>` into your controller through D.I. 
-
-- If Time allows, start on creating the CSS/Frontend Design of your e-commerce site. Start on this early, as it will be a 
-burnden to complete if you wait until the end of the project. 
-
-
-- 
-
+## Code Coverage
+When I ran it... it said 1%, I think I ran it wrong.
 

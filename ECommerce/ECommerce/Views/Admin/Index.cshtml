@@ -1,0 +1,21 @@
+﻿@model ECommerce.Models.ProductViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+<h2>Hello from the admin side</h2>
+
+<button type="button" class="btn btn-success" asp-controller="Product" asp-action="Create">Add New Item</button>
+
+@foreach (var product in Model.Products)
+{
+
+    <h3>@product.Name</h3>
+    <h4>@product.Price</h4>
+    <p>@product.Description</p>
+    <img class="productImage" src=@product.ImagePath />
+    <br />
+    <div class="btn-group">
+        <a class="btn btn-warning" asp-controller="Product" asp-route-id="@product.Id" asp-action="Edit">Edit</a>
+        <a class="btn btn-danger" asp-controller="Product" asp-route-id="@product.Id" asp-action="Delete">Delete</a>
+    </div>
+}

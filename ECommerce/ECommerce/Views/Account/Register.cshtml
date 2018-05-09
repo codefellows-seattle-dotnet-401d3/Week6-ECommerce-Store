@@ -1,0 +1,50 @@
+﻿@model ECommerce.Models.AccountViewModels.RegisterViewModel
+@using ECommerce.Models
+@{ 
+    ViewData["Title"] = "Register";
+}
+<br />
+<h2>Registration</h2>
+
+<form method="post" asp-action="Register">
+    <h3>Create an Account</h3>
+
+    <div>
+        <label asp-for="Email">Email</label>
+        <input class="form-control" asp-for="Email" />
+    </div>
+
+    <div>
+        <label asp-for="FirstName">First Name</label>
+        <input class="form-control" asp-for="FirstName" />
+    </div>
+
+    <div>
+        <label asp-for="LastName">Last Name</label>
+        <input class="form-control" asp-for="LastName" />
+    </div>
+
+    <div>
+        <label asp-for="Location"></label>
+        <select class="form-control" asp-for="Location" asp-items="@Html.GetEnumSelectList(typeof(State))"></select>
+        <span asp-validation-for="Location"></span>
+    </div>
+
+    <div>
+        <label asp-for="Birthday">Birthday</label>
+        <input class="form-control" asp-for="Birthday" />
+    </div>
+
+    <div>
+        <label asp-for="Password">Password</label>
+        <input class="form-control" asp-for="Password" />
+    </div>
+
+    <div>
+        <label asp-for="ConfirmPassword">Confirm Password</label>
+        <input class="form-control" asp-for="ConfirmPassword" />
+    </div>
+    <br />
+    <button class="btn btn-success" type="submit">Submit</button>
+    <button class="btn btn-danger" asp-controller="Home" asp-action="Index">Cancel</button>
+</form>

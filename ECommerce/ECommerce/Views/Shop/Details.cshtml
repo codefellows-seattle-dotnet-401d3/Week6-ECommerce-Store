@@ -1,0 +1,12 @@
+﻿@model ECommerce.Models.Product
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>@Model.Name</h2>
+<h3>$@Model.Price</h3>
+<p>@Model.Description</p>
+<img style="height: 300px; width: auto;"src=@Model.ImagePath />
+<br />
+<br />
+<button type="submit" class="btn btn-warning">Add To Cart</button>

@@ -1,0 +1,15 @@
+﻿@model ECommerce.Models.ProductViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<p>These are the current products in the inventory.</p>
+
+@foreach (var product in Model.Products)
+{
+
+    <h3>@product.Name</h3>
+    <h4>@product.Price</h4>
+    <p>@product.Description</p>
+    <img class="productImage" src=@product.ImagePath />
+}

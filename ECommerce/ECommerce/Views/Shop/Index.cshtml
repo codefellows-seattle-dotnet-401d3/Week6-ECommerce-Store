@@ -1,0 +1,23 @@
+﻿@model ECommerce.Models.ProductViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Please look at our selection.</h2>
+<br />
+@foreach (var product in Model.Products)
+{
+
+    <div class="card mb-3" style="width: 400px;">
+        <h3 class="card-header">@product.Name</h3>
+        <img style="height: 200px; width: 50%; display: block;" src=@product.ImagePath alt="Card image">
+        <div class="card-body">
+            <p class="card-text">@product.Description</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">$@product.Price</li>
+        </ul>
+        <br />
+        <a style="width: 33%;" class="btn btn-info" asp-controller="Shop" asp-route-id="@product.Id" asp-action="Details">Details</a>
+    </div>
+}

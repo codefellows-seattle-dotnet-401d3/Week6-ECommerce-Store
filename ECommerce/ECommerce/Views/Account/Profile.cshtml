@@ -1,0 +1,14 @@
+﻿@model ECommerce.Models.ApplicationUser
+@{
+    ViewData["Title"] = "User Profile";
+}
+
+<h2>Your current profile:</h2>
+<br />
+<dl>
+    <dt>@Html.DisplayNameFor(u => u.Email)</dt>
+    <dd>@Html.DisplayFor(u => u.Email)</dd>
+    <dt>Name:</dt>
+    <dd>@Model.FirstName @Model.LastName</dd>
+    <dd>State: @Html.DisplayFor(u => u.Location)</dd>
+</dl>

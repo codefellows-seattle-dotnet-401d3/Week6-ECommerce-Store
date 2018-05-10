@@ -13,9 +13,21 @@ namespace Emusic.Data
         {
 
         }
+
+        /*Creating the Database sets 
+         */
+
+        //Emusic.Models.Products
         public DbSet<Product> Products { get; set; }
+        //Emusic.Models.Basket
         public DbSet<Basket> Baskets { get; set; }
+        //Emusic.Models.BasketItems
         public DbSet<BasketItem> BasketItems { get; set; }
+
+
+
+        /* Solution Set for creating a basket.
+         */
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

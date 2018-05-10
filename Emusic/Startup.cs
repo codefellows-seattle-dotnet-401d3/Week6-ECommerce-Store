@@ -58,11 +58,16 @@ namespace Emusic
                 options.AddPolicy(ApplicationPolicies.MemberOnly, p => p.RequireRole(ApplicationRoles.Member, ApplicationRoles.Admin));
 
                 //This is the Claims based policy
+
                 options.AddPolicy(ApplicationPolicies.CountryMusicOnly, p => p.RequireClaim(ClaimTypes.StateOrProvince, ((int)Genre.Country).ToString()));
-                //options.AddPolicy("CountryMusicOnly", policy => policy.Requirements.Add(new Minimum("Country")));
+
+                options.AddPolicy("CountryMusicOnly", policy => policy.RequireClaim("Country"));
 
                 //This is the Present based Policy
                 options.AddPolicy(ApplicationPolicies.HeadPhonesOnly, p => p.RequireClaim("MusicVenue", ((int)MusicVenue.ILoveMyHeadPhones).ToString()));
+             
+               // options.AddPolicy("AtLeast21", policy => policy.Requirements.Add(new MinimumAgeRequirement(21)));
+
             });
 
             // add require HTTPs Insert Here.

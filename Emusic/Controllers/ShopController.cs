@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Emusic.Data;
 using Emusic.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 namespace Emusic.Controllers
 {
@@ -17,6 +19,8 @@ namespace Emusic.Controllers
 
     {
         private readonly ProductDbContext _productDbContext;
+
+        
 
 
 
@@ -35,6 +39,18 @@ namespace Emusic.Controllers
             return View(_productDbContext.Products);
         }
 
+
+
+
+        [Authorize(Policy = "CountryMusicOnly")]
+        public async Task<IActionResult> CountryMusicOnly()
+        {
+            return View(new ProductViewModel()
+            {
+                Products = await _productDbContext.Products.ToListAsync()
+            });
+
+        }
 
 
         /// <summary>

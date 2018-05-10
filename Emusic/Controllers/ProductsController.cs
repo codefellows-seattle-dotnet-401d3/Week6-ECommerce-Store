@@ -15,6 +15,7 @@ namespace Emusic.Controllers
     /// Controller For Products if Authorized User
     /// </summary>
 
+        //The main user login
     [Authorize(Policy = ApplicationPolicies.AdminOnly)]
     public class ProductsController : Controller
     {

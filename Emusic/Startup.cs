@@ -52,9 +52,16 @@ namespace Emusic
 
             services.AddAuthorization(options =>
             {
+
+                //These are the roles based policy Member and Administrator 
                 options.AddPolicy(ApplicationPolicies.AdminOnly, p => p.RequireRole(ApplicationRoles.Admin));
                 options.AddPolicy(ApplicationPolicies.MemberOnly, p => p.RequireRole(ApplicationRoles.Member, ApplicationRoles.Admin));
+
+                //This is the Claims based policy
                 options.AddPolicy(ApplicationPolicies.CountryMusicOnly, p => p.RequireClaim(ClaimTypes.StateOrProvince, ((int)Genre.Country).ToString()));
+                //options.AddPolicy("CountryMusicOnly", policy => policy.Requirements.Add(new Minimum("Country")));
+
+                //This is the Present based Policy
                 options.AddPolicy(ApplicationPolicies.HeadPhonesOnly, p => p.RequireClaim("MusicVenue", ((int)MusicVenue.ILoveMyHeadPhones).ToString()));
             });
 

@@ -1,0 +1,51 @@
+﻿@using Ecom.Models
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+
+@model Ecom.Models.LoginViewModel
+@{
+
+    ViewData["Title"] = "Login";
+}
+
+<h2>Login</h2>
+
+<h3>admin@admin.com pw@T3st!</h3>
+
+<form method="post">
+    <div asp-validation-summary="All"></div>
+    <div>
+        <label asp-for="Email">Email</label>
+        <input asp-for="Email" />
+        <span asp-validation-for="Email"></span>
+    </div>
+    <div>
+        <label asp-for="Password">Password</label>
+        <input asp-for="Password" />
+        <span asp-validation-for="Password"></span>
+    </div>
+    <div>
+        <label asp-for="RememberMe">Remember Me</label>
+        <input asp-for="RememberMe" />
+    </div>
+    <div>
+        <button type="submit">Log in</button>
+    </div>
+</form>
+<div class="col-xl-4">
+    <div class="card">
+        <p class="card-header">External Login Providers</p>
+        <div class="card-body">
+            @{
+                var loginProviders = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+                <form asp-action="ExternalLogin" method="post">
+                    @foreach (var provider in loginProviders)
+                    {
+                        <button type="submit" name="provider" value="@provider.Name" class="btn btn-primary">@provider.Name</button>
+                    }
+                </form>
+            }
+        </div>
+    </div>
+</div>

@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Ecom.Models.Product>
+﻿@using Ecom.Components
+@model IEnumerable<Ecom.Models.Product>
 
 @{
     ViewData["Title"] = "Index";
@@ -40,7 +41,7 @@
                 @Html.DisplayFor(modelItem => item.Cost)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Url)
+                <img src="@Html.DisplayFor(modelItem => item.Url)">
             </td>
             <td>
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
@@ -51,3 +52,6 @@
 }
     </tbody>
 </table>
+<div>
+    @Component.InvokeAsync(nameof(CartComponent)).Result
+</div>

@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Emusic.Models
 {
-    public class SeedMemberRoles
+    public static class SeedMemberRoles
     {
 
-        private const string AdminEmail = "email@email.com";
-        private const string AdminPassword = "@test123T"; // upper case password?? Use this to debug the password. if you are missing the 
+        private static string AdminEmail = "email@email.com";
+        private static string AdminPassword = "@test123T"; // upper case password?? Use this to debug the password. if you are missing the 
 
         private static readonly List<IdentityRole> Roles = new List<IdentityRole>()
         {
@@ -55,6 +55,20 @@ namespace Emusic.Models
             await context.Roles.AddRangeAsync(Roles);
             await context.SaveChangesAsync();
         }
+
+        //Allows user admin Privlages
+        public static async Task AddRole(ApplicationDbContext context)
+        {
+            if (await context.Roles.AnyAsync())
+            {
+                return;
+            }
+
+            await context.Roles.AddRangeAsync(Roles);
+            await context.SaveChangesAsync();
+        }
+
+
 
 
         public static async Task AddAdminUser(ApplicationDbContext context,

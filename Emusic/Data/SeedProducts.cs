@@ -24,7 +24,7 @@ namespace Emusic.Data
             {
                 Name = "Steve Young Tickets ",
                 Description= "the hottest upcoming events and concerts in LA ",
-                ImageHref="/images/Admit-One-Ticket.jpg",
+                ImageHref="/images/GarthBrooks.png",
                 Price = 1.00M,
             },
 
@@ -43,6 +43,8 @@ namespace Emusic.Data
                 ImageHref="/images/Admit-One-Ticket.jpg",
                 Price = 2.00M,
             },
+
+
         };
 
         public static async Task Initialize(IServiceProvider services)

@@ -20,10 +20,6 @@ namespace Emusic.Controllers
     {
         private readonly ProductDbContext _productDbContext;
 
-        
-
-
-
         /// <summary>
         /// 
         /// </summary>
@@ -45,10 +41,11 @@ namespace Emusic.Controllers
         [Authorize(Policy = "CountryMusicOnly")]
         public async Task<IActionResult> CountryMusicOnly()
         {
-            return View(new ProductViewModel()
+            //return View(new ProductViewModel()
             {
-                Products = await _productDbContext.Products.ToListAsync()
-            });
+                return View("Country Lovers");
+                //Products = await _productDbContext.Products.ToListAsync()
+            }
 
         }
 

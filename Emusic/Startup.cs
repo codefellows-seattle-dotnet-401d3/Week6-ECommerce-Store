@@ -39,12 +39,12 @@ namespace Emusic
 
 
             services.AddDbContext<ProductDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("ProductionString")));
 
 
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                options.UseSqlServer(Configuration.GetConnectionString("ProductionString"));
             });
 
     
@@ -80,6 +80,7 @@ namespace Emusic
         {
             if (env.IsDevelopment())
             {
+                //If you wanted to add a live production database string enter it here.
                 app.UseDeveloperExceptionPage();
             }
 

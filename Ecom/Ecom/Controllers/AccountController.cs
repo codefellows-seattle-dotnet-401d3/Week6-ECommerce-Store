@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Ecom.Models;
 using Microsoft.AspNetCore.Authorization;
+using SendGrid.Helpers.Mail;
+using SendGrid;
 
 namespace Ecom.Controllers
 {
@@ -46,6 +48,19 @@ namespace Ecom.Controllers
                 //If user was added build and add their claims
                 if (result.Succeeded)
                 {
+                    //Send email confirmation
+                    var msg = new SendGridMessage();
+                    //TODO Set correct from email
+                    msg.SetFrom(new EmailAddress("dx@example.com", "SendGrid DX Team"));
+                    //Set the to address from the view model
+                    msg.AddTo(rvm.Email);
+                    //Set subject
+                    msg.SetSubject("Ecom Registration successful");
+                    //Set content
+                    msg.AddContent(MimeType.Text, "Hello World plain text!");
+                    msg.AddContent(MimeType.Html, "<p>Hello World!</p>");
+
+                    //Arrange claims
                     List<Claim> myClaims = new List<Claim>();
                     Claim nameClaim = new Claim(ClaimTypes.Name, $"{rvm.FirstName} {rvm.LastName}",
                         ClaimValueTypes.String);

@@ -38,12 +38,12 @@ namespace Ecom
 
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("AzureConnection"));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
             services.AddDbContext<ProductDbContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("AzureConnection"));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
             services.AddAuthorization(options =>
@@ -55,8 +55,8 @@ namespace Ecom
 
             services.AddAuthentication().AddGoogle(googleOptions =>
             {
-                googleOptions.ClientId = Configuration["Authentication:Google:web:client_id"];
-                googleOptions.ClientSecret = Configuration["Authentication:Google:web:client_secret"];
+                googleOptions.ClientId = Configuration["client_id"];
+                googleOptions.ClientSecret = Configuration["client_secret"];
             });
         }
 

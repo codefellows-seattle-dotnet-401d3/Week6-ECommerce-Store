@@ -12,6 +12,7 @@ namespace Ecom.Models
         public string LastName { get; set; }
         public Guilds Guild { get; set; }
         public Classes Class { get; set; }
+        public int? CurrentBasketId { get; set; }
     }
 
     public static class ApplicationRoles

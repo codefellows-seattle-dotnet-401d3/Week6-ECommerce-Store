@@ -33,7 +33,7 @@ namespace Ecom.Controllers
             //If something slips in the model toss the user back to the store page
             if (!ModelState.IsValid)
             {
-                return RedirectToAction("Index", "Store");
+                return RedirectToAction("Index", "Products");
             }
 
             //pull the user from the current logged in HttpContext
@@ -57,7 +57,24 @@ namespace Ecom.Controllers
                 await _userManager.UpdateAsync(user);
             }
 
-            return View();
+            BasketItem item = await _productDbContext.BasketItems.FirstOrDefaultAsync(bi => bi.BasketId == basket.Id);
+
+            // Add the item to the basket or if it already exists add to the quantity
+            if (item is null)
+            {
+                await _productDbContext.BasketItems.AddAsync(new BasketItem()
+                {
+                    BasketId = basket.Id,
+                    ProductId = vm.ProductId,
+                    Quantity = vm.Quantity,
+                });
+            }
+            else
+            {
+                item.Quantity += vm.Quantity;
+                _productDbContext.BasketItems.Update(item);
+            }
+            return RedirectToAction("Index", "Products");
         }
     }
 }

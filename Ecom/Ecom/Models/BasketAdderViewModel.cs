@@ -7,6 +7,7 @@ namespace Ecom.Models
 {
     public class BasketAdderViewModel
     {
-
+        public int ProductId { get; set; }
+        public int Quantity { get; set; }
     }
 }

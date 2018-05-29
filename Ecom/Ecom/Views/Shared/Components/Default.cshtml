@@ -1,0 +1,41 @@
+﻿@using Ecom.Models
+
+@model BasketViewModel
+
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Cost
+                </th>
+                <th>
+                    Image
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.CurrentBasket.BasketItems) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Cost)
+            </td>
+            <td>
+                <img src="@Html.DisplayFor(modelItem => item.Product.Url)">
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -8,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using System;
 using Xunit;
 
+
+//Test incomplete because I haven't figured out how to inject a test user database
 namespace EcomTest
 {
     public class BasketControllerTest

@@ -24,11 +24,20 @@ namespace Ecom.Controllers
             _userManager = userManager;
         }
 
+        /// <summary>
+        /// Initial register view
+        /// </summary>
+        /// <returns>Returns an empty view object</returns>
         public IActionResult Register()
         {
             return View();
         }
 
+        /// <summary>
+        /// Will register a new user and place him in the database. The method will also create and add claims to the user
+        /// </summary>
+        /// <param name="rvm">A view model passed in from the route</param>
+        /// <returns>Return will be an empty view object if results are unsuccessful</returns>
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel rvm)
         {
@@ -86,6 +95,10 @@ namespace Ecom.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Logs the user out and returns them to the home index
+        /// </summary>
+        /// <returns>Returns a redirect back to the home index</returns>
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
@@ -93,6 +106,10 @@ namespace Ecom.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        /// <summary>
+        /// Base view action for an empty login view
+        /// </summary>
+        /// <returns>Returns an empty login view</returns>
         [HttpGet]
         public async Task<IActionResult> Login()
         {
@@ -101,6 +118,11 @@ namespace Ecom.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Action to log the user in
+        /// </summary>
+        /// <param name="lvm">View model with login data</param>
+        /// <returns>Returns a view object with the bound view model</returns>
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel lvm)
         {
@@ -123,6 +145,11 @@ namespace Ecom.Controllers
             return View(lvm);
         }
 
+        /// <summary>
+        /// OAuth Action allows users to login with 3rd party credentials
+        /// </summary>
+        /// <param name="provider"></param>
+        /// <returns>Returns a Challenge object that can be used to create and confirm a user</returns>
         [HttpPost]
         [AllowAnonymous]
         public IActionResult ExternalLogin(string provider)
@@ -134,17 +161,25 @@ namespace Ecom.Controllers
             return Challenge(properties, provider);
         }
 
+        /// <summary>
+        /// Callback intended to handle the response from the external OAuth
+        /// </summary>
+        /// <param name="remoteError">Error response from the external source</param>
+        /// <returns>IF all checks fail return to the login view</returns>
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> ExternalLoginCallbackAsync(string remoteError = null)
         {
+            //If an external error comes back redirect to login
             if (remoteError != null)
             {
                 return RedirectToAction(nameof(Login));
             }
 
+            //Get the login info from the sign in manager
             var info = await _signInManager.GetExternalLoginInfoAsync();
 
+            //If the info fails redirect to login
             if (info is null)
             {
                 return RedirectToAction(nameof(Login));
@@ -153,25 +188,30 @@ namespace Ecom.Controllers
             var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey,
                 isPersistent: false, bypassTwoFactor: true);
 
+            //If login is successful go to the product index
             if (result.Succeeded)
             {
-                return RedirectToAction("Index", "Shop");
+                return RedirectToAction("Index", "Product");
             }
 
+            //Find the user by email once it's been added
             string externalPrincipalEmail = info.Principal.FindFirstValue(ClaimTypes.Email);
             ApplicationUser user = await _userManager.FindByEmailAsync(externalPrincipalEmail);
 
+            //If the user fails send the user back to the initial OAuth page
             if (user is null)
             {
                 return RedirectToAction("ExternalRegister", new { provider = info.LoginProvider, email = externalPrincipalEmail });
             }
 
+            //Sign the user in
             if ((await _userManager.AddLoginAsync(user, info)).Succeeded)
             {
                 await _signInManager.SignInAsync(user, isPersistent: false);
-                return RedirectToAction("Index", "Shop");
+                return RedirectToAction("Index", "Product");
             }
 
+            //If all else fails return to the login view
             return RedirectToAction(nameof(Login));
         }
     }

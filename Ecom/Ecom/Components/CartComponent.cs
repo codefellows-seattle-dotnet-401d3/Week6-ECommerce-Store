@@ -2,11 +2,13 @@
 using Ecom.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+//component is incomplete. I can get a simple string to load but anything else seems to throw a "Invoke can't return a task" error
 namespace Ecom.Components
 {
     public class CartComponent : ViewComponent
@@ -20,15 +22,29 @@ namespace Ecom.Components
             _userManager = userManager;
         }
 
+        /// <summary>
+        /// gets the current cart and displays all of the items in a view component
+        /// </summary>
+        /// <returns>Task that holds the view and the view model</returns>
         public async Task<IViewComponentResult> Invoke()
         {
-            int? currentBasketId = (await _userManager.GetUserAsync(HttpContext.User))?.CurrentBasketId;
+            //pull the user from the current logged in HttpContext
+            ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
+
+            //Set our Basket to the current one if it exists
+            Basket basket = user.CurrentBasketId.HasValue ?
+                await _productDbContext.Baskets.FindAsync(user.CurrentBasketId) : null;
+
+            //Create our view model and populate it with a full basket
             BasketViewModel bvm = new BasketViewModel()
             {
-                CurrentBasket = await _productDbContext.Baskets.FindAsync(currentBasketId),
+                CurrentBasket = _productDbContext.Baskets.Where(x => x.Id == basket.Id)
+                                            .Include(p => p.BasketItems)
+                                            .ThenInclude(x => x.Product).First(),
             };
 
-            return Content("Navigation");
+
+            return View(bvm);
         }
     }
 }

@@ -15,18 +15,38 @@ namespace Ecom.Controllers
         private ProductDbContext _productDbContext;
         private UserManager<ApplicationUser> _userManager;
 
-        public BasketController(ProductDbContext productDbContext,
-            UserManager<ApplicationUser> userManager)
+        public BasketController(ProductDbContext productDbContext, UserManager<ApplicationUser> userManager)
         {
             _productDbContext = productDbContext;
             _userManager = userManager;
         }
 
-        public IActionResult Index()
+        /// <summary>
+        /// Method to establish the index of the current basket. This should be what is seen from the view component
+        /// </summary>
+        /// <returns>Returns a view with view model intended to be invoked by the view component </returns>
+        public async Task<IActionResult> Index(BasketViewModel bvm)
         {
-            return View();
+            //pull the user from the current logged in HttpContext
+            ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
+
+            //Set our Basket to the current one if it exists
+            Basket basket = user.CurrentBasketId.HasValue ?
+                await _productDbContext.Baskets.FindAsync(user.CurrentBasketId) : null;
+
+            //Populate our view model with a full basket
+            bvm.CurrentBasket = _productDbContext.Baskets.Where(x => x.Id == basket.Id)
+                                            .Include(p => p.BasketItems)
+                                            .ThenInclude(x => x.Product).First();
+
+            return View(bvm);
         }
 
+        /// <summary>
+        /// Method to add an item to the user's current basket. It will also create a basket if the user doesn't currently have one open.
+        /// </summary>
+        /// <param name="vm">A view model containing the currently desired item</param>
+        /// <returns>The return is a redirect to the products index page</returns>
         [HttpPost]
         public async Task<IActionResult> AddItem(BasketAdderViewModel vm)
         {
@@ -39,6 +59,7 @@ namespace Ecom.Controllers
             //pull the user from the current logged in HttpContext
             ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
 
+            //Set our Basket to the current one if it exists
             Basket basket = user.CurrentBasketId.HasValue ?
                 await _productDbContext.Baskets.FindAsync(user.CurrentBasketId) : null;
 

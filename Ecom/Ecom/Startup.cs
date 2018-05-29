@@ -32,20 +32,24 @@ namespace Ecom
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            //Pull in identity and Entity framework
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            //Connect to the USer DB
             services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            //Connect to the Product DB
             services.AddDbContext<ProductDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            //Setup policies
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("AdminOnly", policy => policy.RequireRole(ApplicationRoles.Admin));
@@ -53,6 +57,7 @@ namespace Ecom
                 options.AddPolicy("IsClassFighter", policy => policy.Requirements.Add(new ClassRequirment("Fighter")));
             });
 
+            //Setup OAuth
             services.AddAuthentication().AddGoogle(googleOptions =>
             {
                 googleOptions.ClientId = Configuration["client_id"];
@@ -71,9 +76,10 @@ namespace Ecom
             app.UseAuthentication();
             app.UseMvcWithDefaultRoute();
 
+            //Catch all route
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("Hello World!");
+                await context.Response.WriteAsync("Well that's not supposed to happen");
             });
         }
     }

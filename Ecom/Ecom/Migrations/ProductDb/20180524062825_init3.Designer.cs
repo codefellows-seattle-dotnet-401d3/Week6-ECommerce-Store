@@ -11,9 +11,10 @@ using System;
 namespace Ecom.Migrations.ProductDb
 {
     [DbContext(typeof(ProductDbContext))]
-    partial class ProductDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180524062825_init3")]
+    partial class init3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,9 +42,9 @@ namespace Ecom.Migrations.ProductDb
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("BasketId");
+                    b.Property<int?>("BasketId");
 
-                    b.Property<int>("ProductId");
+                    b.Property<int?>("ProductId");
 
                     b.Property<int>("Quantity");
 
@@ -110,15 +111,13 @@ namespace Ecom.Migrations.ProductDb
 
             modelBuilder.Entity("Ecom.Models.BasketItem", b =>
                 {
-                    b.HasOne("Ecom.Models.Basket")
+                    b.HasOne("Ecom.Models.Basket", "Basket")
                         .WithMany("BasketItems")
-                        .HasForeignKey("BasketId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("BasketId");
 
                     b.HasOne("Ecom.Models.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ProductId");
                 });
 
             modelBuilder.Entity("Ecom.Models.OrderItem", b =>

@@ -4,7 +4,7 @@ my lab I have choosen to sell music tickets of various degress. This e-commerce 
 Identity attached; which means there is part functionality based around it.
 
 Deployed Version
-http://emusic.azurewebsites.net/
+_unavialable 
 
 ## Author:
 Tiger Hsu
